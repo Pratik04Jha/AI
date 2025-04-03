@@ -1,103 +1,111 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { IoSend } from "react-icons/io5";
+import { GiSlowBlob } from "react-icons/gi";
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false); // Track loading state
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  const sendMessage = async () => {
+    if (!input.trim()) return;
+
+    const newMessages = [...messages, { role: "user", content: input }];
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true); // Start loading animation when sending message
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
+      const data = await res.json();
+      setMessages([...newMessages, { role: "assistant", content: data.reply }]);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setLoading(false); // Stop loading animation once the message is received
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // Prevents default newline behavior
+      sendMessage();
+    }
+  };
+
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center h-screen pl-60 pb-15 pt-15">
+        <div className="w-full h-full bg-zinc-900 p-4 text-white">
+          <div className="h-[76%] overflow-y-auto mb-4 px-60">
+            {messages.length === 0 && (
+              <div className="flex flex-col gap-4 justify-center items-center h-full text-gray-400">
+                <GiSlowBlob color="white" size={50} />
+                <h1 className="font-bold text-4xl text-white">
+                  How can I assist you today?
+                </h1>
+                <p className="text-center text-white/90">
+                  Hello there! 🤖 I'm your smart and friendly AI assistant,
+                  ready to chat, assist, and make your experience effortless.
+                  Ask me anything, and let's create something amazing together!
+                  🚀
+                </p>
+              </div>
+            )}
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`mb-7 flex ${
+                  msg.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                <div
+                  className={`px-4 py-2 rounded-[20px] max-w-[75%] whitespace-pre-line ${
+                    msg.role === "user"
+                      ? "bg-zinc-800 text-white text-left"
+                      : "text-white text-left"
+                  }`}
+                >
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                </div>
+              </div>
+            ))}
+
+            {/* Loading Animation */}
+            {loading && (
+              <div className="flex justify-start mb-4">
+                <span className="dot-animation">.</span>
+                <span className="dot-animation">.</span>
+                <span className="dot-animation">.</span>
+              </div>
+            )}
+          </div>
+
+          {/* Input Box */}
+          <div className="flex fixed bottom-10 left-[50%] -translate-x-1/2">
+            <textarea
+              className="flex-1 h-25 px-6 py-3 pb-10 pr-15 outline-none rounded-[30px] resize-none w-200 bg-zinc-800 ml-60 relative"
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown} // Enter-to-send functionality added
+              placeholder="Ask anything"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <button
+              onClick={sendMessage}
+              className="bg-white text-black p-2 outline-none flex items-center justify-center rounded-full absolute bottom-3 right-3 cursor-pointer"
+            >
+              <IoSend />
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </>
   );
 }
