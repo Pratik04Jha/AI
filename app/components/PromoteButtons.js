@@ -1,8 +1,9 @@
-'use client'
+"use client";
+import React from "react";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const Products = ({ data }) => {
+const PromoteButtons = ({ data }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [hovering, setHovering] = useState(false);
   const [lastPos, setLastPos] = useState(null);
@@ -26,19 +27,17 @@ const Products = ({ data }) => {
     setHovering(false);
     setCursorPos(lastPos);
   };
-
   return (
-    <Link href={data.productSrc}>
+    <Link href={data.src}>
       <div
-        className="relative border-1 border-zinc-700/60 h-50 w-70 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-5 overflow-hidden"
+        className="relative h-45 w-120 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-2 overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Shiny Effect (Now appears initially at center) */}
         {lastPos && (
           <div
-            className="absolute bg-zinc-200 blur-2xl opacity-10 rounded-full transition-all duration-300 ease-out"
+            className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-300 ease-out"
             style={{
               top: `${(hovering ? cursorPos.y : lastPos?.y) - 100}px`,
               left: `${(hovering ? cursorPos.x : lastPos?.x) - 100}px`,
@@ -50,13 +49,16 @@ const Products = ({ data }) => {
         )}
 
         {/* Icon and Heading */}
-        {data.imageIcon}
-        <h1 className="font-bold text-2xl text-center leading-7 text-white/90">
-          {data.heading}
-        </h1>
+        <div className="flex justify-start gap-5 items-center w-full">
+          {data.icon}
+          <h1 className="font-bold text-3xl text-center leading-7 text-white/90">
+            {data.title}
+          </h1>
+        </div>
+        <p>{data.des}</p>
       </div>
     </Link>
   );
 };
 
-export default Products;
+export default PromoteButtons;

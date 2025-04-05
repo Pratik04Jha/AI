@@ -2,7 +2,7 @@ import React from 'react'
 
 const Topbar = () => {
   return (
-    <div className='flex h-10 w-full fixed top-0 left-60 pr-70 py-6  pl-10 justify-between items-center bg-zinc-900 text-white'>
+    <div className='flex h-10 w-full fixed z-10000000000000000 top-0 left-60 pr-70 py-6  pl-10 justify-between items-center bg-zinc-900 text-white'>
           <div className='bg-zinc-700 py-1 px-5 rounded-lg'>
               <h1 >Broke.ai</h1>
           </div>

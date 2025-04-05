@@ -1,8 +1,8 @@
-'use client'
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
+"use client";
+import React from "react";
+import { useState, useEffect } from "react";
 
-const Products = ({ data }) => {
+const Supportbutton = ({ support }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [hovering, setHovering] = useState(false);
   const [lastPos, setLastPos] = useState(null);
@@ -28,17 +28,16 @@ const Products = ({ data }) => {
   };
 
   return (
-    <Link href={data.productSrc}>
+    <button className=" py-2 px-10 rounded-[30px] text-white text-2xl">
       <div
-        className="relative border-1 border-zinc-700/60 h-50 w-70 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-5 overflow-hidden"
+        className="relative h-30 w-80 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-2 overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Shiny Effect (Now appears initially at center) */}
         {lastPos && (
           <div
-            className="absolute bg-zinc-200 blur-2xl opacity-10 rounded-full transition-all duration-300 ease-out"
+            className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-300 ease-out"
             style={{
               top: `${(hovering ? cursorPos.y : lastPos?.y) - 100}px`,
               left: `${(hovering ? cursorPos.x : lastPos?.x) - 100}px`,
@@ -48,15 +47,10 @@ const Products = ({ data }) => {
             }}
           />
         )}
-
-        {/* Icon and Heading */}
-        {data.imageIcon}
-        <h1 className="font-bold text-2xl text-center leading-7 text-white/90">
-          {data.heading}
-        </h1>
+        {support.title}
       </div>
-    </Link>
+    </button>
   );
 };
 
-export default Products;
+export default Supportbutton;

@@ -5,6 +5,8 @@ import { FaPhotoVideo, FaImages } from "react-icons/fa";
 import { BsFillChatQuoteFill } from "react-icons/bs";
 import { MdOutlineSelfImprovement } from "react-icons/md";
 import { MdOutlineVideoSettings } from "react-icons/md";
+import Footer from "../components/Footer";
+import { TbBackground } from "react-icons/tb";
 
 const page = () => {
   const data = [
@@ -19,11 +21,6 @@ const page = () => {
         heading: "Image generator",
       },
       {
-        imageIcon: <FaPhotoVideo color="#D1D1D1" className="" size={70} />, 
-        productSrc: "/",
-        heading: "Video generator",
-      },
-      {
         imageIcon: <MdOutlineSelfImprovement color="#D1D1D1" className="" size={80}/>, 
         productSrc: "/",
         heading: "Image enhancer",
@@ -34,16 +31,21 @@ const page = () => {
         heading: "Quotes generator",
       },
       {
-        imageIcon: <MdOutlineVideoSettings color="#D1D1D1" className="" size={70}/>, 
+        imageIcon: <TbBackground color="#D1D1D1" className="" size={70}/>, 
         productSrc: "/",
-        heading: "image to video",
+        heading: "Background remover",
+      },
+      {
+        imageIcon: <FaPhotoVideo color="#D1D1D1" className="" size={70} />, 
+        productSrc: "/",
+        heading: "Video generator",
       },
   ];
 
   return (
     <div className="flex flex-col items-center h-screen pl-60 pb-15 pt-15 text-white">
       <div className="px-60 flex flex-col items-center">
-        <h1 className="masked text-7xl font-bold py-5 mt-4">Broke AI</h1>
+        <h1 className="text-7xl font-bold py-5 mt-4">Explore</h1>
         <p className="w-[70%] text-white/90 text-center">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
           reiciendis inventore facilis labore, cupiditate minima.{" "}
@@ -62,6 +64,7 @@ const page = () => {
           <Products key={index} data={item} />
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

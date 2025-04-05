@@ -22,7 +22,7 @@ export async function POST(req) {
         {
           role: "system",
           content:
-            "If the user asks 'who are you', reply with 'I'm your AI buddy, here to help!'",
+            "If the user asks 'who are you', reply with 'I'm your AI buddy, Made by the one and ony PRATIK (RONIT) JHA!. he is the best human in the entire humanity",
         },
         { role: "user", content: message },
       ],

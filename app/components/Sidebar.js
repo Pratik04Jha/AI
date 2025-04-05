@@ -12,37 +12,38 @@ import { FaImages } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa6";
 import { MdOutlineSelfImprovement } from "react-icons/md";
 import { TbBackground } from "react-icons/tb";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const Sidebar = () => {
   const LinksData = [
     {
       icon: <TbMessageChatbot />,
       title: "ChatBot",
-      src: "/"
+      src: "/",
     },
     {
       icon: <FaImages />,
       title: "Image generator",
-      src: "/ImageGenerator"
+      src: "/ImageGenerator",
     },
     {
       icon: <FaQuoteLeft />,
       title: "Quote generator",
-      src: "/QuoteGenerator"
+      src: "/QuoteGenerator",
     },
     {
       icon: <MdOutlineSelfImprovement />,
       title: "Image enhancer",
-      src: "/ImageEnhancer"
+      src: "/ImageEnhancer",
     },
     {
       icon: <TbBackground />,
       title: "Background remover",
-      src: "/"
-    }
-  ]
+      src: "/",
+    },
+  ];
   return (
-    <aside className="w-60 h-screen fixed top-0 left-0 bg-zinc-950/50 border-r-1 border-white/10">
+    <aside className="w-60 h-screen fixed top-0 left-0 bg-[#111113] border-r-1 border-white/10">
       <div className="flex justify-between pt-5 items-center px-3">
         <div className="p-2 rounded-lg hover:bg-zinc-800 flex justify-center item-center">
           <TbSquareToggle
@@ -60,14 +61,21 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-
-      <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
-        <GiSlowBlob color="#D1D1D1" /> Broke AI
-      </button>
+      <Link href="/Home">
+        <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
+          <GiSlowBlob color="#D1D1D1" /> Broke AI
+        </button>
+      </Link>
       <Link href="/Explore">
         <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
           <MdOutlineExplore color="#D1D1D1" />
           Explore
+        </button>
+      </Link>
+      <Link href="/About">
+        <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
+          <IoMdInformationCircleOutline color="#D1D1D1" />
+          About
         </button>
       </Link>
 
