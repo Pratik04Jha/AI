@@ -28,7 +28,7 @@ const Topbar = () => {
   ];
 
   return (
-    <div className="flex h-16 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white shadow-lg sm:pl-65">
+    <div className="flex h-14 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white sm:pl-65">
       <Link href="/">
         <div className="bg-zinc-700 py-1 px-5 rounded-lg">
           <h1 className="text-[16px] sm:text-[18px]">Broke.ai</h1>
@@ -48,7 +48,7 @@ const Topbar = () => {
         </button>
 
         <div
-          className={`absolute right-6 top-16 w-48 bg-[#1c1c1f] border border-zinc-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 z-50
+          className={`absolute right-6 top-16 w-48 bg-[#1c1c1f] border border-zinc-800 rounded-lg overflow-hidden transition-all duration-300 z-50
           ${
             showDropdown
               ? "opacity-100 translate-y-0 scale-100"
@@ -68,7 +68,6 @@ const Topbar = () => {
         </div>
       </div>
 
-      {/* Mobile Hamburger */}
       <div className="sm:hidden">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -78,7 +77,6 @@ const Topbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`sm:hidden absolute top-16 left-0 w-full bg-[#1c1c1f] border-t border-zinc-800 shadow-lg transition-all duration-300 z-40
         ${mobileMenuOpen ? "block" : "hidden"}`}

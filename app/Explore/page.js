@@ -1,4 +1,5 @@
-import React from "react";
+'use client';
+import React, { useState } from "react";
 import Products from "../components/Products";
 import { GiSlowBlob } from "react-icons/gi";
 import { FaPhotoVideo, FaImages } from "react-icons/fa";
@@ -8,6 +9,8 @@ import Footer from "../components/Footer";
 import { TbBackground } from "react-icons/tb";
 
 const page = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const data = [
     {
       imageIcon: <GiSlowBlob color="#D1D1D1" size={70} />,
@@ -41,9 +44,13 @@ const page = () => {
     },
   ];
 
+  // Filter the products based on the search input
+  const filteredData = data.filter((item) =>
+    item.heading.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="flex flex-col items-center min-h-screen sm:pl-60 pt-20 sm:pt-15 text-white">
-      
       {/* Header Section */}
       <div className="w-full sm:px-60 px-6 flex flex-col items-center text-center">
         <h1 className="text-4xl sm:text-7xl font-bold py-5 mt-4">Explore</h1>
@@ -57,6 +64,8 @@ const page = () => {
       <div className="w-full sm:px-60 px-6 py-5">
         <input
           type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="h-10 w-full sm:w-[100%] px-4 sm:px-6 py-2 rounded-lg border border-white/50 outline-none bg-transparent text-white placeholder-white/50"
           placeholder="Search the products here"
         />
@@ -64,9 +73,13 @@ const page = () => {
 
       {/* Products Grid */}
       <div className="w-full sm:px-20 px-4 flex flex-wrap justify-center gap-6 sm:gap-8 py-10">
-        {data.map((item, index) => (
-          <Products key={index} data={item} />
-        ))}
+        {filteredData.length > 0 ? (
+          filteredData.map((item, index) => (
+            <Products key={index} data={item} />
+          ))
+        ) : (
+          <p className="text-white/70 w-1/2 text-center text-lg">No products found... [btw there are onlu 6 products why did you need to search for anything]</p>
+        )}
       </div>
 
       <Footer />

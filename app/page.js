@@ -92,7 +92,7 @@ export default function Home() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen md:pl-60 pt-8">
+    <div className="flex flex-col items-center justify-center h-screen md:pl-60 pt-15">
       <div className="w-full h-full bg-zinc-900 p-4 text-white">
         <div className="h-[76%] overflow-y-auto mb-4 px-4 md:px-60">
           {messages.length === 0 && (

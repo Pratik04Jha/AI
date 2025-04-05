@@ -10,13 +10,13 @@ export async function POST(req) {
         status: 400,
       });
 
-    const msgLower = message.toLowerCase();
-    if (msgLower.includes("pratik") || msgLower.includes("created")) {
-      return new Response(
-        JSON.stringify({ reply: "Pratik has created me" }),
-        { status: 200 }
-      );
-    }
+    // const msgLower = message.toLowerCase();
+    // if (msgLower.includes("pratik") || msgLower.includes("created")) {
+    //   return new Response(
+    //     JSON.stringify({ reply: "Pratik has created me" }),
+    //     { status: 200 }
+    //   );
+    // }
 
     const together = new Together({ apiKey: process.env.TOGETHER_API_KEY });
 

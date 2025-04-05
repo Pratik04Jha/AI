@@ -1,23 +1,21 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { TbMessageChatbot, TbSquareToggle } from "react-icons/tb";
+import { usePathname } from "next/navigation"; // 🔥 Added this
+import { TbMessageChatbot, TbBackground } from "react-icons/tb";
 import {
   IoMdSettings,
   IoMdInformationCircleOutline,
   IoMdClose,
 } from "react-icons/io";
-import { FaRegEdit, FaImages } from "react-icons/fa";
+import { FaRegEdit, FaImages, FaPhotoVideo } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa6";
 import { GiSlowBlob } from "react-icons/gi";
-import { MdOutlineExplore } from "react-icons/md";
-import { MdOutlineSelfImprovement } from "react-icons/md";
-import { TbBackground } from "react-icons/tb";
+import { MdOutlineExplore, MdOutlineSelfImprovement } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
-import Links from "./Links";
-import { FaPhotoVideo } from "react-icons/fa";
 
 const Sidebar = () => {
+  const pathname = usePathname();
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -70,12 +68,10 @@ const Sidebar = () => {
       )}
 
       <aside
-        className={`
-          fixed top-0 left-0 h-screen bg-[#111113] border-r border-white/10 z-[100000000]
+        className={`fixed top-0 left-0 h-screen bg-[#111113] border-r border-white/10 z-[100000000]
           transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
-          md:translate-x-0 md:w-60 w-[75%] sm:w-[60%] 
-        `}
+          md:translate-x-0 md:w-60 w-[75%] sm:w-[60%]`}
       >
         <div className="flex justify-between pt-5 items-center px-3 relative">
           {!isSearching && (
@@ -166,20 +162,43 @@ const Sidebar = () => {
           </div>
         </div>
 
+        {/* Highlight active buttons */}
         <Link href="/Home">
-          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
-            <GiSlowBlob color="#D1D1D1" /> Broke AI
+          <button
+            className={`cursor-pointer py-2 w-full text-left rounded-lg mt-5 flex gap-2 px-4 items-center transition-all
+              ${
+                pathname === "/Home"
+                  ? "bg-zinc-800 text-white"
+                  : "text-[#D1D1D1] hover:bg-zinc-800"
+              }`}
+          >
+            <GiSlowBlob />
+            Broke AI
           </button>
         </Link>
         <Link href="/Explore">
-          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
-            <MdOutlineExplore color="#D1D1D1" />
+          <button
+            className={`cursor-pointer py-2 w-full text-left rounded-lg flex gap-2 px-4 items-center transition-all
+              ${
+                pathname === "/Explore"
+                  ? "bg-zinc-800 text-white"
+                  : "text-[#D1D1D1] hover:bg-zinc-800"
+              }`}
+          >
+            <MdOutlineExplore />
             Explore
           </button>
         </Link>
         <Link href="/About">
-          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
-            <IoMdInformationCircleOutline color="#D1D1D1" />
+          <button
+            className={`cursor-pointer py-2 w-full text-left rounded-lg flex gap-2 px-4 items-center transition-all
+              ${
+                pathname === "/About"
+                  ? "bg-zinc-800 text-white"
+                  : "text-[#D1D1D1] hover:bg-zinc-800"
+              }`}
+          >
+            <IoMdInformationCircleOutline />
             About
           </button>
         </Link>
@@ -189,8 +208,19 @@ const Sidebar = () => {
         </p>
         <div className="px-2 mt-2">
           {filteredLinks.length > 0 ? (
-            filteredLinks.map((items, index) => (
-              <Links key={index} LinksData={items} />
+            filteredLinks.map((item, index) => (
+              <Link key={index} href={item.src} className="cursor-pointer">
+                <button
+                  className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all cursor-pointer
+                    ${
+                      pathname === item.src
+                        ? "bg-zinc-800 text-white"
+                        : "text-[#D1D1D1] hover:bg-zinc-800"
+                    }`}
+                >
+                  {item.icon} {item.title}
+                </button>
+              </Link>
             ))
           ) : (
             <p className="text-sm text-gray-400 px-4 py-2">No results found.</p>
@@ -198,7 +228,7 @@ const Sidebar = () => {
         </div>
 
         <button className="absolute bottom-0 py-3 w-full text-[#c3c2c2] text-left flex gap-2 px-4 items-center hover:bg-zinc-900/100">
-          <IoMdSettings color="#c3c2c2" />
+          <IoMdSettings />
           Upgrade to Pro
         </button>
       </aside>
