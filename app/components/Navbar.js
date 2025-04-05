@@ -8,7 +8,7 @@ const Navbar = () => {
       left-0 sm:left-60 sm:w-[calc(100%-15rem)] sm:pr-65 sm:ml-25
     ">
       <p className="text-white/70 text-[14px] sm:text-[12px] leading-snug text-center w-full">
-        AI can make mistakes so please forgive me (Pratik Jha) from the side of AI
+        AI can make mistakes so please forgive me (Pratik Jha) for mistakes of AI, © All rights reserved - Pratik Jha
       </p>
     </nav>
   );

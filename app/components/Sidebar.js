@@ -1,18 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import {
-  TbMessageChatbot,
-  TbSquareToggle,
-} from "react-icons/tb";
+import { TbMessageChatbot, TbSquareToggle } from "react-icons/tb";
 import {
   IoMdSettings,
   IoMdInformationCircleOutline,
   IoMdClose,
 } from "react-icons/io";
-import {
-  FaRegEdit,
-  FaImages,
-} from "react-icons/fa";
+import { FaRegEdit, FaImages } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa6";
 import { GiSlowBlob } from "react-icons/gi";
 import { MdOutlineExplore } from "react-icons/md";
@@ -21,6 +15,7 @@ import { TbBackground } from "react-icons/tb";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import Links from "./Links";
+import { FaPhotoVideo } from "react-icons/fa";
 
 const Sidebar = () => {
   const [search, setSearch] = useState("");
@@ -33,8 +28,13 @@ const Sidebar = () => {
     { icon: <TbMessageChatbot />, title: "ChatBot", src: "/" },
     { icon: <FaImages />, title: "Image generator", src: "/ImageGenerator" },
     { icon: <FaQuoteLeft />, title: "Quote generator", src: "/QuoteGenerator" },
-    { icon: <MdOutlineSelfImprovement />, title: "Image enhancer", src: "/ImageEnhancer" },
+    {
+      icon: <MdOutlineSelfImprovement />,
+      title: "Image enhancer",
+      src: "/ImageEnhancer",
+    },
     { icon: <TbBackground />, title: "Background remover", src: "/" },
+    { icon: <FaPhotoVideo />, title: "Video generator", src: "/" },
   ];
 
   const filteredLinks = LinksData.filter((item) =>
@@ -62,7 +62,6 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Overlay */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-[9999999] md:hidden w-[320px] h-screen"
@@ -70,7 +69,6 @@ const Sidebar = () => {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`
           fixed top-0 left-0 h-screen bg-[#111113] border-r border-white/10 z-[100000000]
@@ -93,7 +91,7 @@ const Sidebar = () => {
                   className="p-2 rounded-lg hover:bg-zinc-800 transition-all cursor-pointer"
                   onClick={() => setIsSearching(true)}
                 >
-                  <IoSearch color="#D1D1D1" size={20} />
+                  <IoSearch color="#D1D1D1" size={25} />
                 </div>
 
                 <div className="relative" ref={dropdownRef}>
@@ -101,12 +99,16 @@ const Sidebar = () => {
                     onClick={() => setShowDropdown(!showDropdown)}
                     className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer"
                   >
-                    <FaRegEdit color="#D1D1D1" size={20} />
+                    <FaRegEdit color="#D1D1D1" size={25} />
                   </div>
 
                   <div
                     className={`absolute right-0 top-12 bg-[#1c1c1f] border border-zinc-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 z-50
-                    ${showDropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+                    ${
+                      showDropdown
+                        ? "opacity-100 scale-100 w-40"
+                        : "opacity-0 scale-95 pointer-events-none"
+                    }`}
                   >
                     {[
                       { title: "Chat with AI", href: "/" },
@@ -146,12 +148,15 @@ const Sidebar = () => {
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className={`bg-zinc-800 text-white px-3 py-1 text-sm rounded transition-all duration-300 ease-in-out
-                ${isSearching ? "w-36 opacity-100" : "w-0 opacity-0 pointer-events-none"}`}
+              className={`bg-zinc-800 text-white px-3 py-1 text-sm rounded transition-all duration-300 ease-in-out outline-none
+                ${
+                  isSearching
+                    ? "w-36 opacity-100"
+                    : "w-0 opacity-0 pointer-events-none"
+                }`}
             />
           </div>
 
-          {/* ❌ Close icon only on mobile */}
           <div className="md:hidden absolute top-4 right-4">
             <IoMdClose
               className="text-white cursor-pointer"
@@ -162,24 +167,26 @@ const Sidebar = () => {
         </div>
 
         <Link href="/Home">
-          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
             <GiSlowBlob color="#D1D1D1" /> Broke AI
           </button>
         </Link>
         <Link href="/Explore">
-          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
             <MdOutlineExplore color="#D1D1D1" />
             Explore
           </button>
         </Link>
         <Link href="/About">
-          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+          <button className="cursor-pointer py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
             <IoMdInformationCircleOutline color="#D1D1D1" />
             About
           </button>
         </Link>
 
-        <p className="text-white text-[15px] font-semibold pl-5 mt-2">Products</p>
+        <p className="text-white text-[15px] font-semibold pl-5 mt-2">
+          Products
+        </p>
         <div className="px-2 mt-2">
           {filteredLinks.length > 0 ? (
             filteredLinks.map((items, index) => (

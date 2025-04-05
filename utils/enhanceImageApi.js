@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const API_KEY = "wxnq7c555q5zfo1bi";
+const API_KEY = process.env.PICWISH_API_KEY;
 const BASE_URL = "https://techhk.aoscdn.com/";
 const MAXIMUM_RETRIES = 20;
 

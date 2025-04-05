@@ -10,7 +10,6 @@ export async function POST(req) {
         status: 400,
       });
 
-    // Handle special keyword-based responses instantly
     const msgLower = message.toLowerCase();
     if (msgLower.includes("pratik") || msgLower.includes("created")) {
       return new Response(
@@ -21,15 +20,13 @@ export async function POST(req) {
 
     const together = new Together({ apiKey: process.env.TOGETHER_API_KEY });
 
-    // Create a ReadableStream for streaming tokens
     const { readable, writable } = new TransformStream();
     const writer = writable.getWriter();
 
-    // Start the completion with stream = true
     together.chat.completions
       .create({
         model: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
-        stream: true, // Enable streaming here
+        stream: true,
         messages: [
           {
             role: "system",

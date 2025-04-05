@@ -24,7 +24,7 @@ export async function POST(req) {
 
         const blob = await response.blob();
         return new Response(blob, {
-            headers: { "Content-Type": "image/png" }, // Assuming PNG output
+            headers: { "Content-Type": "image/png" },
         });
 
     } catch (error) {

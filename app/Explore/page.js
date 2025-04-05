@@ -3,7 +3,7 @@ import Products from "../components/Products";
 import { GiSlowBlob } from "react-icons/gi";
 import { FaPhotoVideo, FaImages } from "react-icons/fa";
 import { BsFillChatQuoteFill } from "react-icons/bs";
-import { MdOutlineSelfImprovement, MdOutlineVideoSettings } from "react-icons/md";
+import { MdOutlineSelfImprovement } from "react-icons/md";
 import Footer from "../components/Footer";
 import { TbBackground } from "react-icons/tb";
 
@@ -57,7 +57,7 @@ const page = () => {
       <div className="w-full sm:px-60 px-6 py-5">
         <input
           type="text"
-          className="h-10 w-full sm:w-[640px] px-4 sm:px-6 py-2 rounded-lg border border-white/50 outline-none bg-transparent text-white placeholder-white/50"
+          className="h-10 w-full sm:w-[100%] px-4 sm:px-6 py-2 rounded-lg border border-white/50 outline-none bg-transparent text-white placeholder-white/50"
           placeholder="Search the products here"
         />
       </div>

@@ -31,7 +31,7 @@ const ImagePreview = (props) => {
           onMouseEnter={() => setHovering1(true)}
           onMouseLeave={() => setHovering1(false)}
         >
-          {/* Shiny Effect */}
+          
           <div
             className="absolute bg-zinc-200 blur-[200px] opacity-10 rounded-full transition-all duration-50"
             style={{

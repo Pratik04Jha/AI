@@ -74,19 +74,24 @@ export default function Page() {
   );
 
   return (
-    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4">
-      {/* Images Grid */}
+    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35">
       <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
-        {/* Left Big Box */}
-        <div className="w-full max-w-[400px] h-[410px]">{renderImageBox(imageSrcs[1], 1)}</div>
+        <div className="w-full max-w-[400px] h-[410px]">
+          {renderImageBox(imageSrcs[1], 1)}
+        </div>
 
-        {/* Right Column */}
         <div className="flex flex-col gap-4 w-full max-w-[400px]">
           <div className="flex gap-4 flex-col sm:flex-row w-full">
-            <div className="w-full sm:w-[50%] h-[200px]">{renderImageBox(imageSrcs[0], 0)}</div>
-            <div className="w-full sm:w-[50%] h-[200px]">{renderImageBox(imageSrcs[2], 2)}</div>
+            <div className="w-full sm:w-[50%] h-[200px]">
+              {renderImageBox(imageSrcs[0], 0)}
+            </div>
+            <div className="w-full sm:w-[50%] h-[200px]">
+              {renderImageBox(imageSrcs[2], 2)}
+            </div>
           </div>
-          <div className="w-full h-[200px]">{renderImageBox(imageSrcs[3], 3)}</div>
+          <div className="w-full h-[200px]">
+            {renderImageBox(imageSrcs[3], 3)}
+          </div>
         </div>
       </div>
 

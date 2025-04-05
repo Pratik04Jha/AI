@@ -49,7 +49,7 @@ export default function QuoteGenerator() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4">
+    <div className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4 justify-center">
       <div className="text-white p-4 md:p-6 rounded-lg w-[90%] md:w-[60%] text-center">
         {loading ? (
           <p>Loading quote...</p>

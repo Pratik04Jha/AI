@@ -37,7 +37,7 @@ const page = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center h-full pt-10 md:pl-60 text-white text-center overflow-x-hidden px-4 sm:px-6">
+    <div className="flex flex-col items-center h-full md:pl-60 text-white text-center overflow-x-hidden px-4 sm:px-6 pt-25 ">
       <h1 className="text-white/90 text-4xl md:text-6xl font-bold">About</h1>
       <div className="w-full flex flex-col">
         <div className="flex justify-center">
@@ -55,7 +55,7 @@ const page = () => {
           Technologies used
         </h1>
         <div className="flex justify-center w-full">
-          <ul className="flex flex-wrap justify-center gap-5 mt-5 w-full md:w-1/2">
+          <ul className="flex flex-wrap justify-center gap-5 mt-5 sm:w-[60%]  w-full">
             {data.map((items, index) => (
               <Technologies key={index} data={items} />
             ))}
@@ -67,7 +67,7 @@ const page = () => {
           APIs used
         </h1>
         <div className="flex justify-center w-full">
-          <ul className="flex flex-wrap justify-center gap-5 mt-5 w-full md:w-1/2">
+          <ul className="flex flex-wrap justify-center gap-5 mt-5 w-full sm:w-[60%] ">
             {Apidata.map((items, index) => (
               <Technologies key={index} data={items} />
             ))}

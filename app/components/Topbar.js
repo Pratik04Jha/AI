@@ -10,17 +10,13 @@ const Topbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
         setMobileMenuOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const dropdownItems = [
@@ -33,17 +29,16 @@ const Topbar = () => {
 
   return (
     <div className="flex h-16 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white shadow-lg sm:pl-65">
-      {/* Brand name */}
-      <div className="bg-zinc-700 py-1 px-5 rounded-lg">
-        <h1 className="text-[16px] sm:text-[18px]">Broke.ai</h1>
-      </div>
+      <Link href="/">
+        <div className="bg-zinc-700 py-1 px-5 rounded-lg">
+          <h1 className="text-[16px] sm:text-[18px]">Broke.ai</h1>
+        </div>
+      </Link>
 
-      {/* Desktop center title */}
       <h1 className="hidden sm:block font-semibold text-[18px] text-white/90">
         Pratik.ai
       </h1>
 
-      {/* Desktop Nav */}
       <div className="hidden sm:flex gap-4 items-center" ref={dropdownRef}>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
@@ -54,10 +49,11 @@ const Topbar = () => {
 
         <div
           className={`absolute right-6 top-16 w-48 bg-[#1c1c1f] border border-zinc-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 z-50
-          ${showDropdown
+          ${
+            showDropdown
               ? "opacity-100 translate-y-0 scale-100"
               : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
-            }`}
+          }`}
         >
           {dropdownItems.map((item, idx) => (
             <Link
