@@ -11,128 +11,111 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="container relative py-20 pb-16 flex flex-col bg-zinc-800/30 text-white text-center h-150 width-full pl-30 pr-10 gap-6 ">
-      <div className="flex  justify-start gap-16">
-        <div className="text-left">
-          <h1 className="font-semibold text-white/90 text-[18px] pb-2 ">
-            Website Links
-          </h1>
-          <ul className="text-[14px] text-white/80">
-            <Link href="" className="hover:underline">
-              <li className="">Home</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Explore</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>About</li>
-            </Link>
-          </ul>
+    <footer className="w-full bg-zinc-800/30 text-white pt-14 pb-10 px-5 ">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+        {/* Top Footer: Links */}
+        <div className="flex flex-col lg:flex-row justify-between gap-12 text-center lg:text-left sm:px-60">
+          {/* Column 1 */}
+          <div>
+            <h1 className="font-semibold text-white/90 text-lg pb-2">
+              Website Links
+            </h1>
+            <ul className="text-sm text-white/80 space-y-1">
+              <li>
+                <Link href="" className="hover:underline">Home</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Explore</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">About</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2 */}
+          <div>
+            <h1 className="font-semibold text-white/90 text-lg pb-2">
+              Products
+            </h1>
+            <ul className="text-sm text-white/80 space-y-1">
+              <li>
+                <Link href="" className="hover:underline">ChatBot</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Image generator</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Quote generator</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Image enhancer</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3 */}
+          <div>
+            <h1 className="font-semibold text-white/90 text-lg pb-2">
+              Other Products
+            </h1>
+            <ul className="text-sm text-white/80 space-y-1">
+              <li>
+                <Link href="" className="hover:underline">Main Website</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Portfolio</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Arcade</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Artificial Intelligence</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Blog, Article, Thoughts</Link>
+              </li>
+              <li>
+                <Link href="" className="hover:underline">Productivity</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4 */}
+          <div>
+            <h1 className="font-semibold text-white/90 text-lg pb-2">
+              Follow Me
+            </h1>
+            <ul className="text-sm text-white/80 space-y-1">
+              <li><Link href="" className="hover:underline">Instagram</Link></li>
+              <li><Link href="" className="hover:underline">Twitter (X)</Link></li>
+              <li><Link href="" className="hover:underline">LinkedIn</Link></li>
+              <li><Link href="" className="hover:underline">GitHub</Link></li>
+              <li><Link href="" className="hover:underline">Facebook</Link></li>
+              <li><Link href="" className="hover:underline">Quora</Link></li>
+            </ul>
+          </div>
         </div>
-        <div className="text-left">
-          <h1 className="font-semibold text-white/90 text-[18px] pb-2 ">
-            Products
-          </h1>
-          <ul className="text-[14px] text-white/80">
-            <Link href="" className="hover:underline">
-              <li>ChatBot</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Image generator</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Quote generator</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Image enhancer</li>
-            </Link>
-          </ul>
-        </div>
-        <div className="text-left">
-          <h1 className="font-semibold text-white/90 text-[18px] pb-2 ">
-            Other products
-          </h1>
-          <ul className="text-[14px] text-white/80">
-            <Link href="" className="hover:underline">
-              <li>Main Website</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Portfolio</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Arcade</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Artificial intelligence</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Blog, Artice, thoughts</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Productivity</li>
-            </Link>
-          </ul>
-        </div>
-        <div className="text-left">
-          <h1 className="font-semibold text-white/90 text-[18px] pb-2 ">
-            Follow me
-          </h1>
-          <ul className="text-[14px] text-white/80">
-            <Link href="" className="hover:underline">
-              <li>Instagram</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Twitter(X)</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Linkedin</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Github</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Facebook</li>
-            </Link>
-            <Link href="" className="hover:underline">
-              <li>Quora</li>
-            </Link>
-          </ul>
-        </div>
-      </div>
-      <div className=" mt-15">
-        <div className="flex gap-3 justify-end">
+
+        {/* Bottom Footer: Social Icons */}
+        <div className="flex justify-center lg:justify-end gap-4">
           <Link href="https://www.instagram.com/">
-            <FaInstagram
-              className="text-white/80 hover:text-white/100"
-              size={25}
-            />
+            <FaInstagram className="text-white/80 hover:text-white" size={24} />
           </Link>
           <Link href="https://www.github.com/">
-            <FaGithub
-              className="text-white/80 hover:text-white/100"
-              size={25}
-            />
+            <FaGithub className="text-white/80 hover:text-white" size={24} />
           </Link>
           <Link href="https://www.twitter.com/">
-            <FaTwitter
-              className="text-white/80 hover:text-white/100"
-              size={25}
-            />
+            <FaTwitter className="text-white/80 hover:text-white" size={24} />
           </Link>
           <Link href="https://www.facebook.com/">
-            <FaFacebook
-              className="text-white/80 hover:text-white/100"
-              size={25}
-            />
+            <FaFacebook className="text-white/80 hover:text-white" size={24} />
           </Link>
           <Link href="https://www.linkedin.com/">
-            <FaLinkedin
-              className="text-white/80 hover:text-white/100"
-              size={25}
-            />
+            <FaLinkedin className="text-white/80 hover:text-white" size={24} />
           </Link>
           <Link href="https://www.quora.com/">
-            <FaQuora className="text-white/80 hover:text-white/100" size={25} />
+            <FaQuora className="text-white/80 hover:text-white" size={24} />
           </Link>
         </div>
       </div>

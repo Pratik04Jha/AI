@@ -13,7 +13,7 @@ export default function QuoteGenerator() {
   const fetchQuote = async () => {
     setLoading(true);
     setClicked(true);
-    setTimeout(() => setClicked(false), 500); // Reset click effect after animation
+    setTimeout(() => setClicked(false), 500);
 
     try {
       const res = await fetch(
@@ -34,13 +34,11 @@ export default function QuoteGenerator() {
     fetchQuote();
   }, []);
 
-  // Track cursor movement inside the quote box
   const handleQuoteHover = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  // Track cursor movement inside the button
   const handleButtonHover = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setButtonHover({
@@ -51,18 +49,18 @@ export default function QuoteGenerator() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10 h-screen pl-60 pb-15 pt-15">
-      <div className="text-white p-6 rounded-lg w-[60%] text-center">
+    <div className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4">
+      <div className="text-white p-4 md:p-6 rounded-lg w-[90%] md:w-[60%] text-center">
         {loading ? (
           <p>Loading quote...</p>
         ) : (
           <>
             {/* QUOTE BOX */}
             <div
-              className="bg-zinc-800 relative py-2 px-6 rounded-2xl min-h-40 items-center justify-center flex overflow-hidden"
+              className="bg-zinc-800 relative py-4 px-4 rounded-2xl min-h-40 items-center justify-center flex overflow-hidden"
               onMouseMove={handleQuoteHover}
             >
-              {/* QUOTE BOX Hover Glow Effect (Always Visible) */}
+              {/* Hover Glow */}
               <div
                 className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-75"
                 style={{
@@ -73,34 +71,30 @@ export default function QuoteGenerator() {
                   pointerEvents: "none",
                 }}
               />
-
-              <FaQuoteLeft className="absolute top-5 left-10" size={30} />
-              <FaQuoteRight className="absolute bottom-5 right-10" size={30} />
-              <p className="text-lg italic w-full">"{quote}"</p>
+              <FaQuoteLeft className="absolute top-3 left-4 md:top-5 md:left-10" size={20} />
+              <FaQuoteRight className="absolute bottom-3 right-4 md:bottom-5 md:right-10" size={20} />
+              <p className="text-base md:text-lg italic w-full">"{quote}"</p>
             </div>
 
             <p className="mt-2 font-bold text-right pr-4">- {author}</p>
           </>
         )}
 
-        {/* INSANE BUTTON WITH HOVER + CLICK EFFECTS */}
+        {/* BUTTON */}
         <div className="relative mt-6">
-          {/* Click Effect: Shockwave */}
           {clicked && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="absolute w-24 h-24 rounded-full bg-gradient-to-r from-zinc-700 to-zinc-400 opacity-40 animate-ping"></div>
             </div>
           )}
 
-          {/* The BUTTON itself */}
           <button
             onClick={fetchQuote}
             onMouseMove={handleButtonHover}
-            className="relative z-10 bg-zinc-700 text-white px-10 py-2 rounded-lg cursor-pointer 
+            className="relative z-10 bg-zinc-700 text-white px-8 py-2 rounded-lg cursor-pointer 
             transition-transform transform active:scale-95 border-transparent hover:border-zinc-500 
-            overflow-hidden"
+            overflow-hidden text-sm md:text-base"
           >
-            {/* Button Hover Glow Effect (Always Visible) */}
             <div
               className="absolute rounded-full bg-zinc-200 opacity-20 blur-[50px] transition-all duration-75"
               style={{
@@ -111,7 +105,6 @@ export default function QuoteGenerator() {
                 pointerEvents: "none",
               }}
             />
-
             Generate new quote
           </button>
         </div>

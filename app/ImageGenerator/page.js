@@ -2,33 +2,34 @@
 import { useState } from "react";
 import { MdDownload } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
-import { FaImages } from "react-icons/fa";
 
 export default function Page() {
   const [prompt, setPrompt] = useState("");
-  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrcs, setImageSrcs] = useState([null, null, null, null]);
   const [loading, setLoading] = useState(false);
 
   const generateImage = async () => {
     if (!prompt.trim()) return;
 
     setLoading(true);
-    setImageSrc(null);
+    setImageSrcs([null, null, null, null]);
 
     try {
-      const response = await fetch("/api/imageSave", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt }),
-      });
+      const imagePromises = Array.from({ length: 4 }, () =>
+        fetch("/api/imageSave", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt }),
+        }).then((res) => res.blob())
+      );
 
-      const blob = await response.blob();
-      const imageUrl = URL.createObjectURL(blob);
-      setImageSrc(imageUrl);
+      const blobs = await Promise.all(imagePromises);
+      const imageUrls = blobs.map((blob) => URL.createObjectURL(blob));
+      setImageSrcs(imageUrls);
     } catch (error) {
-      console.error("Error generating image:", error);
+      console.error("Error generating images:", error);
     }
 
     setLoading(false);
@@ -36,69 +37,76 @@ export default function Page() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault(); // Prevents newline when pressing Enter
+      e.preventDefault();
       generateImage();
     }
   };
 
+  const renderSkeleton = () => (
+    <div className="animate-pulse bg-zinc-800 w-full h-full rounded-xl border border-zinc-700" />
+  );
+
+  const renderImageBox = (src, index) => (
+    <div
+      key={index}
+      className="relative w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900"
+    >
+      {loading ? (
+        renderSkeleton()
+      ) : src ? (
+        <>
+          <img
+            src={src}
+            alt="Generated"
+            className="w-full h-full object-cover rounded-xl fade-in"
+          />
+          <a
+            href={src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute bottom-2 right-2 z-10 p-[4px] rounded-lg bg-[#111113]/80 hover:bg-[#1a1a1d]"
+          >
+            <MdDownload color="#B4B4B4" size={24} />
+          </a>
+        </>
+      ) : null}
+    </div>
+  );
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen pl-60 pb-15 pt-0">
-      {imageSrc === null && !loading && (
-        <div className="flex flex-col gap-4 justify-center items-center h-full text-gray-400 pb-15">
-          <FaImages color="white" size={50} />
-          <h1 className="font-bold text-4xl text-white">
-          AI Image Creator
-          </h1>
-          <p className="text-center text-white/90 w-1/2">
-            "🎨 Welcome! I'm your AI-powered image creator—turning imagination
-            into stunning visuals. Describe your vision, and I'll bring it to
-            life with precision and creativity. Let’s craft something
-            extraordinary! 🚀
-          </p>
-        </div>
-      )}
+    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4">
+      {/* Images Grid */}
+      <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
+        {/* Left Big Box */}
+        <div className="w-full max-w-[400px] h-[410px]">{renderImageBox(imageSrcs[1], 1)}</div>
 
-      {loading && (
-        <p className="text-white text-xl font-bold">
-          Generating image... Please wait.
-        </p>
-      )}
-
-      {imageSrc && (
-        <div className="relative">
-          <div className="pb-20 relative">
-            <img
-              src={imageSrc}
-              alt="Generated"
-              className="w-[400px] h-[400px] rounded-lg border-1 border-zinc-700"
-            />
-            <a
-              href={imageSrc}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-22 right-2 z-1000000 p-[4px] rounded-lg bg-[#111113]"
-            >
-              <MdDownload color="#B4B4B4" size={30} />
-            </a>
+        {/* Right Column */}
+        <div className="flex flex-col gap-4 w-full max-w-[400px]">
+          <div className="flex gap-4 flex-col sm:flex-row w-full">
+            <div className="w-full sm:w-[50%] h-[200px]">{renderImageBox(imageSrcs[0], 0)}</div>
+            <div className="w-full sm:w-[50%] h-[200px]">{renderImageBox(imageSrcs[2], 2)}</div>
           </div>
+          <div className="w-full h-[200px]">{renderImageBox(imageSrcs[3], 3)}</div>
         </div>
-      )}
+      </div>
 
-      <div className="flex fixed bottom-10 left-[50%] -translate-x-1/2">
-        <textarea
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 h-25 px-6 py-3 pb-10 pr-15 text-white outline-none rounded-[30px] resize-none w-200 bg-zinc-800 ml-60 relative"
-          type="text"
-          placeholder="Eg: Generate an image of a futuristic city skyline with neon lights"
-        />
-        <button
-          className="bg-white text-black p-2 outline-none flex items-center justify-center rounded-full absolute bottom-3 right-3 cursor-pointer"
-          onClick={generateImage}
-        >
-          <IoSend />
-        </button>
+      {/* Textarea */}
+      <div className="fixed bottom-10  w-full max-w-[800px] px-4">
+        <div className="relative w-full">
+          <textarea
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="w-full h-24 px-6 py-4 pr-14 text-white outline-none rounded-[30px] resize-none bg-zinc-800"
+            placeholder="Eg: Generate an image of a futuristic city skyline with neon lights"
+          />
+          <button
+            className="bg-white text-black p-2 flex items-center justify-center rounded-full absolute bottom-3 right-3"
+            onClick={generateImage}
+          >
+            <IoSend />
+          </button>
+        </div>
       </div>
     </div>
   );

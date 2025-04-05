@@ -1,19 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 const PromoteButtons = ({ data }) => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [hovering, setHovering] = useState(false);
   const [lastPos, setLastPos] = useState(null);
 
-  // Set the initial position to the center of the div
   useEffect(() => {
-    setLastPos({ x: 35, y: 25 }); // Adjust based on div size
+    setLastPos({ x: 35, y: 25 });
   }, []);
 
-  // Track cursor movement inside the div
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -22,19 +19,22 @@ const PromoteButtons = ({ data }) => {
     setLastPos({ x, y });
   };
 
-  // Handle mouse leave
   const handleMouseLeave = () => {
     setHovering(false);
     setCursorPos(lastPos);
   };
+
   return (
     <Link href={data.src}>
       <div
-        className="relative h-45 w-120 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-2 overflow-hidden"
+        className="relative rounded-lg px-5 py-6 cursor-pointer flex flex-col justify-center gap-4 overflow-hidden 
+        w-full sm:w-[90%] md:w-[80%] lg:w-[30rem] h-auto 
+        bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}
       >
+        {/* Glowing effect */}
         {lastPos && (
           <div
             className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-300 ease-out"
@@ -48,14 +48,16 @@ const PromoteButtons = ({ data }) => {
           />
         )}
 
-        {/* Icon and Heading */}
-        <div className="flex justify-start gap-5 items-center w-full">
+        {/* Icon and Title */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 w-full">
           {data.icon}
-          <h1 className="font-bold text-3xl text-center leading-7 text-white/90">
+          <h1 className="font-bold text-xl sm:text-2xl md:text-3xl text-white/90">
             {data.title}
           </h1>
         </div>
-        <p>{data.des}</p>
+
+        {/* Description */}
+        <p className="text-sm sm:text-base text-white/70">{data.des}</p>
       </div>
     </Link>
   );

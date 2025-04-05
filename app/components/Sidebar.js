@@ -1,98 +1,201 @@
-import React from "react";
-import { TbSquareToggle } from "react-icons/tb";
-import { IoSearch } from "react-icons/io5";
-import { FaRegEdit } from "react-icons/fa";
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  TbMessageChatbot,
+  TbSquareToggle,
+} from "react-icons/tb";
+import {
+  IoMdSettings,
+  IoMdInformationCircleOutline,
+  IoMdClose,
+} from "react-icons/io";
+import {
+  FaRegEdit,
+  FaImages,
+} from "react-icons/fa";
+import { FaQuoteLeft } from "react-icons/fa6";
 import { GiSlowBlob } from "react-icons/gi";
 import { MdOutlineExplore } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
-import Link from "next/link";
-import Links from "./Links";
-import { TbMessageChatbot } from "react-icons/tb";
-import { FaImages } from "react-icons/fa";
-import { FaQuoteLeft } from "react-icons/fa6";
 import { MdOutlineSelfImprovement } from "react-icons/md";
 import { TbBackground } from "react-icons/tb";
-import { IoMdInformationCircleOutline } from "react-icons/io";
+import { IoSearch } from "react-icons/io5";
+import Link from "next/link";
+import Links from "./Links";
 
 const Sidebar = () => {
+  const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
   const LinksData = [
-    {
-      icon: <TbMessageChatbot />,
-      title: "ChatBot",
-      src: "/",
-    },
-    {
-      icon: <FaImages />,
-      title: "Image generator",
-      src: "/ImageGenerator",
-    },
-    {
-      icon: <FaQuoteLeft />,
-      title: "Quote generator",
-      src: "/QuoteGenerator",
-    },
-    {
-      icon: <MdOutlineSelfImprovement />,
-      title: "Image enhancer",
-      src: "/ImageEnhancer",
-    },
-    {
-      icon: <TbBackground />,
-      title: "Background remover",
-      src: "/",
-    },
+    { icon: <TbMessageChatbot />, title: "ChatBot", src: "/" },
+    { icon: <FaImages />, title: "Image generator", src: "/ImageGenerator" },
+    { icon: <FaQuoteLeft />, title: "Quote generator", src: "/QuoteGenerator" },
+    { icon: <MdOutlineSelfImprovement />, title: "Image enhancer", src: "/ImageEnhancer" },
+    { icon: <TbBackground />, title: "Background remover", src: "/" },
   ];
+
+  const filteredLinks = LinksData.filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <aside className="w-60 h-screen fixed top-0 left-0 bg-[#111113] border-r-1 border-white/10">
-      <div className="flex justify-between pt-5 items-center px-3">
-        <div className="p-2 rounded-lg hover:bg-zinc-800 flex justify-center item-center">
-          <TbSquareToggle
-            color="#D1D1D1"
-            size={25}
-            className="cursor-pointer "
-          />
-        </div>
-        <div className="flex gap-3 ">
-          <div className="p-2 rounded-lg hover:bg-zinc-800 flex justify-center item-center">
-            <IoSearch color="#D1D1D1" size={25} className="cursor-pointer" />
-          </div>
-          <div className="p-2 rounded-lg hover:bg-zinc-800 flex justify-center item-center">
-            <FaRegEdit color="#D1D1D1" size={25} className="cursor-pointer" />
-          </div>
-        </div>
-      </div>
-      <Link href="/Home">
-        <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
-          <GiSlowBlob color="#D1D1D1" /> Broke AI
+    <>
+      <div className="md:hidden fixed top-4 left-4 z-[100000000]">
+        <button
+          className="text-white bg-zinc-800 p-2 rounded-md shadow-md"
+          onClick={() => setIsSidebarOpen(true)}
+        >
+          ☰
         </button>
-      </Link>
-      <Link href="/Explore">
-        <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
-          <MdOutlineExplore color="#D1D1D1" />
-          Explore
-        </button>
-      </Link>
-      <Link href="/About">
-        <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-800">
-          <IoMdInformationCircleOutline color="#D1D1D1" />
-          About
-        </button>
-      </Link>
-
-      <p className="text-white text-[15px] font-semibold pl-5 mt-2 ">
-        Products
-      </p>
-      <div className="px-2 mt-2">
-        {LinksData.map((items, index) => (
-          <Links key={index} LinksData={items} />
-        ))}
       </div>
 
-      <button className="absolute bottom-0 py-3 w-full text-[#c3c2c2] text-left mt-5 cursor-pointer flex gap-2 px-4 items-center hover:bg-zinc-900/100">
-        <IoMdSettings color="#c3c2c2" />
-        Settings
-      </button>
-    </aside>
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[9999999] md:hidden w-[320px] h-screen"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed top-0 left-0 h-screen bg-[#111113] border-r border-white/10 z-[100000000]
+          transition-transform duration-300 ease-in-out
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
+          md:translate-x-0 md:w-60 w-[75%] sm:w-[60%] 
+        `}
+      >
+        <div className="flex justify-between pt-5 items-center px-3 relative">
+          {!isSearching && (
+            <div className="p-2 rounded-lg hover:bg-zinc-800 flex items-center transition-all">
+              <GiSlowBlob color="#D1D1D1" size={25} />
+            </div>
+          )}
+
+          <div className="flex gap-2 items-center">
+            {!isSearching && (
+              <>
+                <div
+                  className="p-2 rounded-lg hover:bg-zinc-800 transition-all cursor-pointer"
+                  onClick={() => setIsSearching(true)}
+                >
+                  <IoSearch color="#D1D1D1" size={20} />
+                </div>
+
+                <div className="relative" ref={dropdownRef}>
+                  <div
+                    onClick={() => setShowDropdown(!showDropdown)}
+                    className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer"
+                  >
+                    <FaRegEdit color="#D1D1D1" size={20} />
+                  </div>
+
+                  <div
+                    className={`absolute right-0 top-12 bg-[#1c1c1f] border border-zinc-800 rounded-lg shadow-xl overflow-hidden transition-all duration-300 z-50
+                    ${showDropdown ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+                  >
+                    {[
+                      { title: "Chat with AI", href: "/" },
+                      { title: "Generate Images", href: "/ImageGenerator" },
+                      { title: "Enhance Images", href: "/ImageEnhancer" },
+                      { title: "Remove BG", href: "/" },
+                      { title: "Generate Quotes", href: "/QuoteGenerator" },
+                    ].map((item, idx) => (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        className="block text-white text-sm px-4 py-2 hover:bg-zinc-700 transition-all"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+
+            {isSearching && (
+              <div
+                className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer"
+                onClick={() => {
+                  setIsSearching(false);
+                  setSearch("");
+                }}
+              >
+                <IoMdClose color="#D1D1D1" size={22} />
+              </div>
+            )}
+
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className={`bg-zinc-800 text-white px-3 py-1 text-sm rounded transition-all duration-300 ease-in-out
+                ${isSearching ? "w-36 opacity-100" : "w-0 opacity-0 pointer-events-none"}`}
+            />
+          </div>
+
+          {/* ❌ Close icon only on mobile */}
+          <div className="md:hidden absolute top-4 right-4">
+            <IoMdClose
+              className="text-white cursor-pointer"
+              size={24}
+              onClick={() => setIsSidebarOpen(false)}
+            />
+          </div>
+        </div>
+
+        <Link href="/Home">
+          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg mt-5 flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+            <GiSlowBlob color="#D1D1D1" /> Broke AI
+          </button>
+        </Link>
+        <Link href="/Explore">
+          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+            <MdOutlineExplore color="#D1D1D1" />
+            Explore
+          </button>
+        </Link>
+        <Link href="/About">
+          <button className="py-2 w-full text-[#D1D1D1] text-left rounded-lg flex gap-2 px-4 items-center hover:bg-zinc-800 transition-all">
+            <IoMdInformationCircleOutline color="#D1D1D1" />
+            About
+          </button>
+        </Link>
+
+        <p className="text-white text-[15px] font-semibold pl-5 mt-2">Products</p>
+        <div className="px-2 mt-2">
+          {filteredLinks.length > 0 ? (
+            filteredLinks.map((items, index) => (
+              <Links key={index} LinksData={items} />
+            ))
+          ) : (
+            <p className="text-sm text-gray-400 px-4 py-2">No results found.</p>
+          )}
+        </div>
+
+        <button className="absolute bottom-0 py-3 w-full text-[#c3c2c2] text-left flex gap-2 px-4 items-center hover:bg-zinc-900/100">
+          <IoMdSettings color="#c3c2c2" />
+          Upgrade to Pro
+        </button>
+      </aside>
+    </>
   );
 };
 

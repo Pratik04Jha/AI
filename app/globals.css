@@ -126,3 +126,8 @@
   border-radius: 0;
 }
 
+#nprogress .bar {
+  background: rgb(157, 0, 157); /* or any color */
+  height: 2px;
+  border-radius: 10px;
+}
