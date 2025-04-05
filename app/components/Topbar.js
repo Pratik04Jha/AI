@@ -28,7 +28,7 @@ const Topbar = () => {
   ];
 
   return (
-    <div className="flex h-14 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white sm:pl-65">
+    <div className="flex h-14 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white sm:pl-65 pl-20 ">
       <Link href="/">
         <div className="bg-zinc-700 py-1 px-5 rounded-lg">
           <h1 className="text-[16px] sm:text-[18px]">Broke.ai</h1>
@@ -71,9 +71,9 @@ const Topbar = () => {
       <div className="sm:hidden">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-white text-xl"
+          className="bg-white text-black rounded-lg py-1 px-4 font-semibold cursor-pointer"
         >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          {mobileMenuOpen ? <FaTimes /> : "Products"}
         </button>
       </div>
 

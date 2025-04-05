@@ -51,9 +51,9 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="md:hidden fixed top-4 left-4 z-[100000000]">
+      <div className="md:hidden fixed top-2 left-4 z-[100000000]">
         <button
-          className="text-white bg-zinc-800 p-2 rounded-md shadow-md"
+          className="text-white bg-zinc-800 p-2 rounded-md px-4"
           onClick={() => setIsSidebarOpen(true)}
         >
           ☰
@@ -93,7 +93,7 @@ const Sidebar = () => {
                 <div className="relative" ref={dropdownRef}>
                   <div
                     onClick={() => setShowDropdown(!showDropdown)}
-                    className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer"
+                    className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer mr-4 sm:mr-0 md:mr-0"
                   >
                     <FaRegEdit color="#D1D1D1" size={25} />
                   </div>
@@ -153,7 +153,7 @@ const Sidebar = () => {
             />
           </div>
 
-          <div className="md:hidden absolute top-4 right-4">
+          <div className="md:hidden absolute top-5 bg-zinc-800 p-2 rounded-lg right-2">
             <IoMdClose
               className="text-white cursor-pointer"
               size={24}

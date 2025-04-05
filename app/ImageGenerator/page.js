@@ -74,7 +74,7 @@ export default function Page() {
   );
 
   return (
-    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35">
+    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35 pb-40">
       <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
         <div className="imagebox w-full max-w-[400px] h-[410px]">
           {renderImageBox(imageSrcs[1], 1)}
