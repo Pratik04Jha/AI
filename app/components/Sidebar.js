@@ -183,7 +183,7 @@ const Sidebar = () => {
               }`}
           >
             <GiSlowBlob />
-            Broke AI
+            Zenius AI
           </button>
         </Link>
         <Link href="/Explore">

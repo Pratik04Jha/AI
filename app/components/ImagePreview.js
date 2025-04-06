@@ -1,6 +1,7 @@
 "use client";
 
-import Loading from "./Loading";
+import Loading from "./SkeletonLoader";
+import SkeletonLoader from "./SkeletonLoader";
 import { useState } from "react";
 import { MdDownload } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -29,7 +30,8 @@ const ImagePreview = (props) => {
     onMouseEnter,
     onMouseLeave,
     label,
-    delay = 0
+    delay = 0,
+    loading = false,
   }) => (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -62,9 +64,11 @@ const ImagePreview = (props) => {
         <h1>{label}</h1>
       </motion.div>
 
-      {/* Image and hoverable download button */}
+      {/* Image / Loader / Message */}
       <div className="h-[90%] w-full flex justify-center items-center relative">
-        {src ? (
+        {loading ? (
+          <SkeletonLoader />
+        ) : src ? (
           <>
             <motion.img
               initial={{ opacity: 0, scale: 0.95 }}
@@ -116,19 +120,21 @@ const ImagePreview = (props) => {
           onMouseEnter: () => setHovering1(true),
           onMouseLeave: () => setHovering1(false),
           label: "Uploaded image",
-          delay: 0.2
+          delay: 0.2,
+          loading: false,
         })}
 
         {/* Enhanced Image */}
         {renderImageBox({
-          src: props.enhanced && !props.loading ? props.enhanced : null,
+          src: props.enhanced,
           hovering: hovering2,
           cursorPos: cursorPos2,
           onMouseMove: handleMouseMove2,
           onMouseEnter: () => setHovering2(true),
           onMouseLeave: () => setHovering2(false),
           label: "Enhanced image",
-          delay: 0.4
+          delay: 0.4,
+          loading: props.loading,
         })}
       </div>
     </div>

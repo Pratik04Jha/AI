@@ -109,9 +109,9 @@ export default function Home() {
                   How can I assist you today?
                 </h1>
                 <p className="text-center text-white/90">
-                  Hello there! I’m your intelligent and reliable AI assistant,
+                  Hello there! I’m Zenius, an intelligent and reliable AI assistant,
                   here to guide, support, and simplify your journey. Feel free
-                  to ask anything, and let’s build something incredible
+                  to ask anything, and let’s do something incredible
                   together!
                 </p>
               </motion.div>
