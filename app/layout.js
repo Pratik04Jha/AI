@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import "./globals.css";
 import ProgressBar from "./components/ProgressBar";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "ZeniusVerse – The Ultimate AI Universe",
@@ -74,6 +75,7 @@ export default function RootLayout({ children }) {
         <Topbar />
         <Sidebar />
         {children}
+        <SpeedInsights/>
         <Navbar />
       </body>
     </html>
