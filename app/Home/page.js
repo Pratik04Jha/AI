@@ -66,12 +66,13 @@ const page = () => {
           <h1 className="text-lg sm:text-xl md:text-2xl text-center md:text-left">
             Github repository –
           </h1>
-
+          <Link href="https://github.com/Pratik04Jha/AI">
           <button className="changed relative overflow-hidden text-base sm:text-lg md:text-2xl py-5 px-18 sm:py-4 sm:px-40 md:py-10 md:px-32 cursor-pointer hover:scale-[1.05] transition-all duration-300 ease-in-out bg-amber-50 text-black rounded-[100px] flex items-center justify-center">
             <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-10 text-white mix-blend-difference whitespace-nowrap">
               View code
             </span>
           </button>
+          </Link>
         </div>
       </FadeInWhenVisible>
 
