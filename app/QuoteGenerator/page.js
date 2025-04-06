@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export default function QuoteGenerator() {
   const [quote, setQuote] = useState("");
@@ -49,18 +50,35 @@ export default function QuoteGenerator() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4 justify-center">
-      <div className="text-white p-4 md:p-6 rounded-lg w-[90%] md:w-[60%] text-center">
+    <motion.div
+      className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4 justify-center"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <motion.div
+        className="text-white p-4 md:p-6 rounded-lg w-[90%] md:w-[60%] text-center"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+      >
         {loading ? (
-          <p>Loading quote...</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            Loading quote...
+          </motion.p>
         ) : (
           <>
-            {/* QUOTE BOX */}
-            <div
+            <motion.div
               className="bg-zinc-800 relative py-4 px-4 rounded-2xl min-h-40 items-center justify-center flex overflow-hidden"
               onMouseMove={handleQuoteHover}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
             >
-              {/* Hover Glow */}
               <div
                 className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-75"
                 style={{
@@ -74,13 +92,18 @@ export default function QuoteGenerator() {
               <FaQuoteLeft className="absolute top-3 left-4 md:top-5 md:left-10" size={20} />
               <FaQuoteRight className="absolute bottom-3 right-4 md:bottom-5 md:right-10" size={20} />
               <p className="text-base md:text-lg italic w-full">"{quote}"</p>
-            </div>
-
-            <p className="mt-2 font-bold text-right pr-4">- {author}</p>
+            </motion.div>
+            <motion.p
+              className="mt-2 font-bold text-right pr-4"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              - {author}
+            </motion.p>
           </>
         )}
 
-        {/* BUTTON */}
         <div className="relative mt-6">
           {clicked && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -88,12 +111,14 @@ export default function QuoteGenerator() {
             </div>
           )}
 
-          <button
+          <motion.button
             onClick={fetchQuote}
             onMouseMove={handleButtonHover}
             className="relative z-10 bg-zinc-700 text-white px-8 py-2 rounded-lg cursor-pointer 
             transition-transform transform active:scale-95 border-transparent hover:border-zinc-500 
             overflow-hidden text-sm md:text-base"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <div
               className="absolute rounded-full bg-zinc-200 opacity-20 blur-[50px] transition-all duration-75"
@@ -106,9 +131,9 @@ export default function QuoteGenerator() {
               }}
             />
             Generate new quote
-          </button>
+          </motion.button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

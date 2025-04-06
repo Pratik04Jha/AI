@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -28,28 +29,30 @@ const Supportbutton = ({ support }) => {
   };
 
   return (
-    <button className=" py-2 px-10 rounded-[30px] text-white text-2xl">
-      <div
-        className="relative h-30 w-80 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-2 overflow-hidden"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={handleMouseLeave}
-      >
-        {lastPos && (
-          <div
-            className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-300 ease-out"
-            style={{
-              top: `${(hovering ? cursorPos.y : lastPos?.y) - 100}px`,
-              left: `${(hovering ? cursorPos.x : lastPos?.x) - 100}px`,
-              width: "200px",
-              height: "200px",
-              pointerEvents: "none",
-            }}
-          />
-        )}
-        {support.title}
-      </div>
-    </button>
+    <Link href={support.src} target="_blank">
+      <button className=" py-2 px-10 rounded-[30px] text-white text-2xl">
+        <div
+          className="relative h-30 w-80 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-2 overflow-hidden"
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={handleMouseLeave}
+        >
+          {lastPos && (
+            <div
+              className="absolute bg-zinc-200 blur-[100px] opacity-20 rounded-full transition-all duration-300 ease-out"
+              style={{
+                top: `${(hovering ? cursorPos.y : lastPos?.y) - 100}px`,
+                left: `${(hovering ? cursorPos.x : lastPos?.x) - 100}px`,
+                width: "200px",
+                height: "200px",
+                pointerEvents: "none",
+              }}
+            />
+          )}
+          {support.title}
+        </div>
+      </button>
+    </Link>
   );
 };
 

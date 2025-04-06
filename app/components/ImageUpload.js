@@ -9,7 +9,7 @@ const ImageUpload = (props) => {
     };
 
     return (
-        <div className="flex fixed bottom-10 left-[50%] -translate-x-1/2 w-[90%] sm:w-auto">
+        <div className="flex fixed bottom-10 z-9999999 left-[50%] -translate-x-1/2 w-[90%] sm:w-auto">
             <div className='flex-1 h-25 p-2 outline-none rounded-[30px] resize-none w-full sm:w-200 bg-zinc-800 sm:ml-60 relative'>
 
             <label

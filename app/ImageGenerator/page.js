@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { MdDownload } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
+import { motion } from "framer-motion"; // 🪄 Magic import
 
 export default function Page() {
   const [prompt, setPrompt] = useState("");
@@ -49,7 +50,7 @@ export default function Page() {
   const renderImageBox = (src, index) => (
     <div
       key={index}
-      className="relative w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900"
+      className="relative group w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900"
     >
       {loading ? (
         renderSkeleton()
@@ -62,9 +63,8 @@ export default function Page() {
           />
           <a
             href={src}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute bottom-2 right-2 z-10 p-[4px] rounded-lg bg-[#111113]/80 hover:bg-[#1a1a1d]"
+            download={`generated-image-${index + 1}.png`}
+            className="absolute bottom-2 right-2 z-10 p-[4px] rounded-lg bg-[#111113]/80 hover:bg-[#1a1a1d] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
             <MdDownload color="#B4B4B4" size={24} />
           </a>
@@ -74,7 +74,12 @@ export default function Page() {
   );
 
   return (
-    <div className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35 pb-40">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35 pb-40"
+    >
       <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
         <div className="imagebox w-full max-w-[400px] h-[410px]">
           {renderImageBox(imageSrcs[1], 1)}
@@ -96,7 +101,7 @@ export default function Page() {
       </div>
 
       {/* Textarea */}
-      <div className="fixed bottom-10  w-full max-w-[800px] px-4">
+      <div className="fixed bottom-10 w-full max-w-[800px] px-4">
         <div className="relative w-full">
           <textarea
             value={prompt}
@@ -113,6 +118,6 @@ export default function Page() {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

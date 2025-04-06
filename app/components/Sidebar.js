@@ -1,9 +1,8 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { usePathname } from "next/navigation"; // 🔥 Added this
+import { usePathname } from "next/navigation";
 import { TbMessageChatbot, TbBackground } from "react-icons/tb";
 import {
-  IoMdSettings,
   IoMdInformationCircleOutline,
   IoMdClose,
 } from "react-icons/io";
@@ -13,6 +12,7 @@ import { GiSlowBlob } from "react-icons/gi";
 import { MdOutlineExplore, MdOutlineSelfImprovement } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
+import { GrUpgrade } from "react-icons/gr";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -31,8 +31,16 @@ const Sidebar = () => {
       title: "Image enhancer",
       src: "/ImageEnhancer",
     },
-    { icon: <TbBackground />, title: "Background remover", src: "/" },
-    { icon: <FaPhotoVideo />, title: "Video generator", src: "/" },
+    {
+      icon: <TbBackground />,
+      title: "Background remover",
+      src: "/BackgroundRemover",
+    },
+    {
+      icon: <FaPhotoVideo />,
+      title: "Video generator",
+      src: "/VideoGenerator",
+    },
   ];
 
   const filteredLinks = LinksData.filter((item) =>
@@ -75,9 +83,11 @@ const Sidebar = () => {
       >
         <div className="flex justify-between pt-5 items-center px-3 relative">
           {!isSearching && (
-            <div className="p-2 rounded-lg hover:bg-zinc-800 flex items-center transition-all">
-              <GiSlowBlob color="#D1D1D1" size={25} />
-            </div>
+            <Link href="/Home">
+              <div className="p-2 rounded-lg hover:bg-zinc-800 flex items-center transition-all cursor-pointer">
+                <GiSlowBlob color="#D1D1D1" size={25} />
+              </div>
+            </Link>
           )}
 
           <div className="flex gap-2 items-center">
@@ -226,11 +236,12 @@ const Sidebar = () => {
             <p className="text-sm text-gray-400 px-4 py-2">No results found.</p>
           )}
         </div>
-
-        <button className="absolute bottom-0 py-3 w-full text-[#c3c2c2] text-left flex gap-2 px-4 items-center hover:bg-zinc-900/100">
-          <IoMdSettings />
-          Upgrade to Pro
-        </button>
+        <Link href="/UpgradeToPro">
+          <button className="absolute bottom-0 py-3 cursor-pointer w-full text-[#c3c2c2] text-left flex gap-2 px-4 items-center hover:bg-zinc-900/100">
+            <GrUpgrade />
+            Upgrade to Pro
+          </button>
+        </Link>
       </aside>
     </>
   );

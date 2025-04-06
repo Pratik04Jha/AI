@@ -20,17 +20,17 @@ const Footer = () => {
             </h1>
             <ul className="text-sm text-white/80 space-y-1">
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/Home" className="hover:underline">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/Explore" className="hover:underline">
                   Explore
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/About" className="hover:underline">
                   About
                 </Link>
               </li>
@@ -43,22 +43,22 @@ const Footer = () => {
             </h1>
             <ul className="text-sm text-white/80 space-y-1">
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/" className="hover:underline">
                   ChatBot
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/ImageGenerator" className="hover:underline">
                   Image generator
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/QuoteGenerator" className="hover:underline">
                   Quote generator
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/ImageEnhancer" className="hover:underline">
                   Image enhancer
                 </Link>
               </li>
@@ -72,32 +72,32 @@ const Footer = () => {
             </h1>
             <ul className="text-sm text-white/80 space-y-1">
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="" className="hover:underline" target="_blank">
                   Main Website
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://pratik-the-legend.vercel.app/" className="hover:underline" target="_blank">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://arcade-zeta.vercel.app/" className="hover:underline" target="_blank">
                   Arcade
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="/" className="hover:underline" target="_blank">
                   Artificial Intelligence
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="" className="hover:underline" target="_blank">
                   Blog, Article, Thoughts
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="" className="hover:underline" target="_blank">
                   Productivity
                 </Link>
               </li>
@@ -110,32 +110,32 @@ const Footer = () => {
             </h1>
             <ul className="text-sm text-white/80 space-y-1">
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://www.instagram.com/poptale_artz/"  target="_blank"  className="hover:underline">
                   Instagram
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://x.com/pratik04jha" target="_blank" className="hover:underline">
                   Twitter (X)
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://www.linkedin.com/in/pratik-jha-380037301/" target="_blank" className="hover:underline">
                   LinkedIn
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://github.com/Pratik04Jha" target="_blank" className="hover:underline">
                   GitHub
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://www.facebook.com/profile.php?id=61574732885384" target="_blank" className="hover:underline">
                   Facebook
                 </Link>
               </li>
               <li>
-                <Link href="" className="hover:underline">
+                <Link href="https://www.quora.com/profile/Pratik-1703" target="_blank" className="hover:underline">
                   Quora
                 </Link>
               </li>
@@ -144,22 +144,22 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-center lg:justify-end gap-4">
-          <Link href="https://www.instagram.com/">
+          <Link href="https://www.instagram.com/poptale_artz/" target="_blank" >
             <FaInstagram className="text-white/80 hover:text-white" size={24} />
           </Link>
-          <Link href="https://www.github.com/">
+          <Link href="https://github.com/Pratik04Jha/" target="_blank" >
             <FaGithub className="text-white/80 hover:text-white" size={24} />
           </Link>
-          <Link href="https://www.twitter.com/">
+          <Link href="https://x.com/pratik04jha/" target="_blank" >
             <FaTwitter className="text-white/80 hover:text-white" size={24} />
           </Link>
-          <Link href="https://www.facebook.com/">
+          <Link href="https://www.facebook.com/profile.php?id=61574732885384/" target="_blank" >
             <FaFacebook className="text-white/80 hover:text-white" size={24} />
           </Link>
-          <Link href="https://www.linkedin.com/">
+          <Link href="https://www.linkedin.com/in/pratik-jha-380037301/" target="_blank" >
             <FaLinkedin className="text-white/80 hover:text-white" size={24} />
           </Link>
-          <Link href="https://www.quora.com/">
+          <Link href="https://www.quora.com/profile/Pratik-1703/" target="_blank" >
             <FaQuora className="text-white/80 hover:text-white" size={24} />
           </Link>
         </div>
