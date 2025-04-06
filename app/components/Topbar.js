@@ -31,7 +31,7 @@ const Topbar = () => {
     <div className="flex h-14 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white sm:pl-65 pl-20 ">
       <Link href="/">
         <div className="bg-zinc-700 py-1 px-5 rounded-lg">
-          <h1 className="text-[16px] sm:text-[18px]">Zenius AI</h1>
+          <h1 className="text-[16px] sm:text-xl">Zenius AI</h1>
         </div>
       </Link>
 
