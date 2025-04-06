@@ -5,6 +5,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdOutlineExplore } from "react-icons/md";
 import Footer from "../components/Footer";
 import FadeInWhenVisible from "../components/FadeInWhenVisible"; // ← new
+import Link from "next/link";
 
 const page = () => {
   const data = [
