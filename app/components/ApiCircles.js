@@ -33,7 +33,7 @@ const Technologies = ({ Apidata }) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Blurry glow following cursor */}
+     
       {lastPos && (
         <div
           className="absolute bg-white blur-[40px] opacity-10 rounded-full transition-all duration-300 ease-out pointer-events-none"
@@ -46,7 +46,7 @@ const Technologies = ({ Apidata }) => {
         />
       )}
 
-      {/* Actual text on top */}
+     
       <span className="z-10 text-white">{Apidata.title}</span>
     </li>
   );

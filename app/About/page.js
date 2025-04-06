@@ -25,7 +25,6 @@ const fadeUpContainer = {
   },
 };
 
-
 const page = () => {
   const data = [
     { title: "Next.js" },
@@ -176,7 +175,6 @@ const page = () => {
           </div>
         </motion.div>
 
-        {/* Support */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -203,18 +201,17 @@ const page = () => {
           </div>
         </motion.div>
 
-        {/* Social */}
         <motion.div
-  variants={fadeUpContainer}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  className="flex flex-col items-center mt-40 w-full gap-4"
->
-  {social.map((items, index) => (
-    <SocialButtons key={index} social={items} variants={fadeUp} />
-  ))}
-</motion.div>
+          variants={fadeUpContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex flex-col items-center mt-40 w-full gap-4"
+        >
+          {social.map((items, index) => (
+            <SocialButtons key={index} social={items} variants={fadeUp} />
+          ))}
+        </motion.div>
       </div>
 
       <Footer />

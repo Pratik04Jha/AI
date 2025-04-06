@@ -14,7 +14,7 @@ const ProgressBar = () => {
     NProgress.start();
     const timeout = setTimeout(() => {
       NProgress.done();
-    }, 300); // you can tweak this delay for smoother feel
+    }, 300);
 
     return () => clearTimeout(timeout);
   }, [pathname]);

@@ -7,9 +7,8 @@ const Technologies = ({ data }) => {
   const [lastPos, setLastPos] = useState(null);
   const liRef = useRef(null);
 
-  // Set initial position (center of the li)
   useEffect(() => {
-    setLastPos({ x: 50, y: 50 }); // Center for 100x100 size (h-24 w-24)
+    setLastPos({ x: 50, y: 50 });
   }, []);
 
   const handleMouseMove = (e) => {
@@ -33,7 +32,6 @@ const Technologies = ({ data }) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Blurry glow following cursor */}
       {lastPos && (
         <div
           className="absolute bg-white blur-[40px] opacity-10 rounded-full transition-all duration-300 ease-out pointer-events-none"

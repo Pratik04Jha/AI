@@ -8,12 +8,10 @@ const Supportbutton = ({ support }) => {
   const [hovering, setHovering] = useState(false);
   const [lastPos, setLastPos] = useState(null);
 
-  // Set the initial position to the center of the div
   useEffect(() => {
-    setLastPos({ x: 35, y: 25 }); // Adjust based on div size
+    setLastPos({ x: 35, y: 25 });
   }, []);
 
-  // Track cursor movement inside the div
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;

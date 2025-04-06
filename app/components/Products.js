@@ -7,12 +7,10 @@ const Products = ({ data }) => {
   const [hovering, setHovering] = useState(false);
   const [lastPos, setLastPos] = useState(null);
 
-  // Set the initial position to the center of the div
   useEffect(() => {
-    setLastPos({ x: 35, y: 25 }); // Adjust based on div size
+    setLastPos({ x: 35, y: 25 });
   }, []);
 
-  // Track cursor movement inside the div
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -35,7 +33,6 @@ const Products = ({ data }) => {
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Shiny Effect (Now appears initially at center) */}
         {lastPos && (
           <div
             className="absolute bg-zinc-200 blur-2xl opacity-10 rounded-full transition-all duration-300 ease-out"
@@ -49,7 +46,6 @@ const Products = ({ data }) => {
           />
         )}
 
-        {/* Icon and Heading */}
         {data.imageIcon}
         <h1 className="font-bold text-2xl text-center leading-7 text-white/90">
           {data.heading}

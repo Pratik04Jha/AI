@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { MdDownload } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
-import { motion } from "framer-motion"; // 🪄 Magic import
+import { motion } from "framer-motion";
 
 export default function Page() {
   const [prompt, setPrompt] = useState("");

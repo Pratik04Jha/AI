@@ -64,9 +64,7 @@ const fetchEnhancedImage = async (taskId) => {
     `${BASE_URL}/api/tasks/visual/scale/${taskId}`,
     { headers: { "X-API-KEY": API_KEY } }
   );
-  console.log("API Response:", data); // Debug: Check the actual response
+  console.log("API Response:", data);
   if (!data?.data) throw new Error("Failed to fetch enhanced image!");
-  return data.data; // Ensure this contains `image` or the correct URL field
+  return data.data;
 };
-
-// {status: 200, message: "success", data: {task_id: "187b1adc-b35f-46d7-8670-47f88f89fd73"}}

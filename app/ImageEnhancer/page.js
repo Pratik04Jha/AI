@@ -32,7 +32,6 @@ const Home = () => {
             h-screen px-4 py-8
             sm:pr-60 sm:pl-120 sm:py-15"
     >
-      {/* Upload Animation */}
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -42,7 +41,6 @@ const Home = () => {
         <ImageUpload UploadImageHandler={UploadImageHandler} />
       </motion.div>
 
-      {/* Preview Animation */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

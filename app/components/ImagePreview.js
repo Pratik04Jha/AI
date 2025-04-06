@@ -1,6 +1,4 @@
 "use client";
-
-import Loading from "./SkeletonLoader";
 import SkeletonLoader from "./SkeletonLoader";
 import { useState } from "react";
 import { MdDownload } from "react-icons/md";

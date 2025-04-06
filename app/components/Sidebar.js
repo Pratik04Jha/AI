@@ -172,7 +172,6 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* Highlight active buttons */}
         <Link href="/Home">
           <button
             className={`cursor-pointer py-2 w-full text-left rounded-lg mt-5 flex gap-2 px-4 items-center transition-all

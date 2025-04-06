@@ -1,4 +1,3 @@
-// components/FadeInWhenVisible.js
 "use client";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
