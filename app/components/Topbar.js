@@ -2,6 +2,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import Link from "next/link";
+import { AiOutlineProduct } from "react-icons/ai";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { MdOutlineFeedback } from "react-icons/md";
+
 
 const Topbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -28,23 +32,25 @@ const Topbar = () => {
   ];
 
   return (
-    <div className="flex h-14 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-zinc-900 text-white sm:pl-65 pl-20 ">
-      <Link href="/">
-        <div className="bg-zinc-700 py-1 px-5 rounded-lg">
-          <h1 className="text-[16px] sm:text-xl">Zenius AI</h1>
-        </div>
-      </Link>
-
-      <h1 className="hidden sm:block font-semibold text-[18px] text-white/90">
-        Pratik.Jha
-      </h1>
-
-      <div className="hidden sm:flex gap-4 items-center" ref={dropdownRef}>
+    <div className="flex h-15 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-black text-white sm:pl-65 pl-20 ">
+      <div className="hidden sm:flex gap-5 items-center justify-end w-full " ref={dropdownRef}>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
-          className="bg-white text-black rounded-lg py-1 px-4 font-semibold cursor-pointer"
+          className=" text-white rounded-lg  font-extralight cursor-pointer"
         >
-          Products
+          <MdOutlineFeedback size={25} />
+        </button>
+        <button
+          onClick={() => setShowDropdown(!showDropdown)}
+          className=" text-white rounded-lg  font-bold cursor-pointer"
+        >
+          <AiOutlineProduct size={25} />
+        </button>
+        <button
+          onClick={() => setShowDropdown(!showDropdown)}
+          className=" text-white rounded-lg  font-extralight cursor-pointer"
+        >
+          <FaRegCircleUser size={23} />
         </button>
 
         <div

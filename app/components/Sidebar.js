@@ -5,6 +5,8 @@ import { TbMessageChatbot, TbBackground } from "react-icons/tb";
 import {
   IoMdInformationCircleOutline,
   IoMdClose,
+  IoMdArrowDropdown,
+  IoMdArrowDropup,
 } from "react-icons/io";
 import { FaRegEdit, FaImages, FaPhotoVideo } from "react-icons/fa";
 import { FaQuoteLeft } from "react-icons/fa6";
@@ -20,6 +22,7 @@ const Sidebar = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showProductsDropdown, setShowProductsDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
   const LinksData = [
@@ -76,36 +79,36 @@ const Sidebar = () => {
       )}
 
       <aside
-        className={`fixed top-0 left-0 h-screen bg-[#111113] border-r border-white/10 z-[100000000]
+        className={`fixed top-0 left-0 h-screen bg-black border-r-[0.1px] border-zinc-800 z-[100000000]
           transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:w-60 w-[75%] sm:w-[60%]`}
       >
-        <div className="flex justify-between pt-5 items-center px-3 relative">
+        <div className="flex justify-between pt-2 items-center relative">
           {!isSearching && (
             <Link href="/Home">
-              <div className="p-2 rounded-lg hover:bg-zinc-800 flex items-center transition-all cursor-pointer">
-                <GiSlowBlob color="#D1D1D1" size={25} />
+              <div className="p-2 ml-3 rounded-lg flex items-center transition-all cursor-pointer">
+                <GiSlowBlob color="#FFFFFF" size={25} />
               </div>
             </Link>
           )}
 
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center w-full">
             {!isSearching && (
-              <>
+              <div className="flex items-center justify-end w-full">
                 <div
-                  className="p-2 rounded-lg hover:bg-zinc-800 transition-all cursor-pointer"
+                  className="p-2 rounded-lg transition-all cursor-pointer"
                   onClick={() => setIsSearching(true)}
                 >
-                  <IoSearch color="#D1D1D1" size={25} />
+                  <IoSearch color="#FFFFFF" size={25} />
                 </div>
 
                 <div className="relative" ref={dropdownRef}>
                   <div
                     onClick={() => setShowDropdown(!showDropdown)}
-                    className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer mr-4 sm:mr-0 md:mr-0"
+                    className="p-2 rounded-lg cursor-pointer sm:mr-0 md:mr-0"
                   >
-                    <FaRegEdit color="#D1D1D1" size={25} />
+                    <FaRegEdit color="#FFFFFF" size={25} />
                   </div>
 
                   <div
@@ -134,7 +137,7 @@ const Sidebar = () => {
                     ))}
                   </div>
                 </div>
-              </>
+              </div>
             )}
 
             {isSearching && (
@@ -178,7 +181,7 @@ const Sidebar = () => {
               ${
                 pathname === "/Home"
                   ? "bg-zinc-800 text-white"
-                  : "text-[#D1D1D1] hover:bg-zinc-800"
+                  : "text-[#FFFFFF] "
               }`}
           >
             <GiSlowBlob />
@@ -191,7 +194,7 @@ const Sidebar = () => {
               ${
                 pathname === "/Explore"
                   ? "bg-zinc-800 text-white"
-                  : "text-[#D1D1D1] hover:bg-zinc-800"
+                  : "text-[#FFFFFF] "
               }`}
           >
             <MdOutlineExplore />
@@ -204,7 +207,7 @@ const Sidebar = () => {
               ${
                 pathname === "/About"
                   ? "bg-zinc-800 text-white"
-                  : "text-[#D1D1D1] hover:bg-zinc-800"
+                  : "text-[#FFFFFF] "
               }`}
           >
             <IoMdInformationCircleOutline />
@@ -212,31 +215,56 @@ const Sidebar = () => {
           </button>
         </Link>
 
-        <p className="text-white text-[15px] font-semibold pl-5 mt-2">
-          Products
-        </p>
-        <div className="px-2 mt-2">
-          {filteredLinks.length > 0 ? (
-            filteredLinks.map((item, index) => (
-              <Link key={index} href={item.src} className="cursor-pointer">
-                <button
-                  className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all cursor-pointer
-                    ${
-                      pathname === item.src
-                        ? "bg-zinc-800 text-white"
-                        : "text-[#D1D1D1] hover:bg-zinc-800"
-                    }`}
-                >
-                  {item.icon} {item.title}
-                </button>
-              </Link>
-            ))
-          ) : (
-            <p className="text-sm text-gray-400 px-4 py-2">No results found.</p>
-          )}
+        {/* Products Dropdown */}
+        <div className="mt-2">
+          <button
+            className="flex items-center justify-between w-full px-5 py-2 text-white text-[15px] font-semibold  rounded-lg cursor-pointer transition-all"
+            onClick={() => setShowProductsDropdown(!showProductsDropdown)}
+          >
+            <div className="flex items-center gap-2">
+              Products
+            </div>
+            {showProductsDropdown ? (
+              <IoMdArrowDropup size={20} />
+            ) : (
+              <IoMdArrowDropdown size={20} />
+            )}
+          </button>
+
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              showProductsDropdown ? "max-h-96" : "max-h-0"
+            }`}
+          >
+            <div className="px-2 mt-1">
+              {filteredLinks.length > 0 ? (
+                filteredLinks.map((item, index) => (
+                  <Link key={index} href={item.src} className="cursor-pointer">
+                    <button
+                      className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all cursor-pointer
+                        ${
+                          pathname === item.src
+                            ? "bg-zinc-800 text-white"
+                            : "text-[#FFFFFF] hover:bg-zinc-900"
+                        }`}
+                    >
+                      {item.icon} {item.title}
+                    </button>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-sm text-gray-400 px-4 py-2">
+                  No results found.
+                </p>
+              )}
+            </div>
+          </div>
         </div>
+
+        {/* <p className="text-white">History</p> */}
+
         <Link href="/UpgradeToPro">
-          <button className="absolute bottom-0 py-3 cursor-pointer w-full text-[#c3c2c2] text-left flex gap-2 px-4 items-center hover:bg-zinc-900/100">
+          <button className="absolute bottom-0 py-3 cursor-pointer w-full text-[#FFFFFF] text-left flex gap-2 px-4 items-center hover:bg-zinc-900">
             <GrUpgrade />
             Upgrade to Pro
           </button>

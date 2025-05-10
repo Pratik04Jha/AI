@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 
 const page = () => {
   return (
-    <div className="min-h-screen bg-zinc-900 text-white flex items-center justify-center p-4 sm:pl-60">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 sm:pl-60">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-zinc-800 max-w-3xl w-full rounded-2xl p-8 shadow-xl text-center space-y-6"
+        className="bg-black max-w-3xl w-full rounded-2xl p-8 shadow-xl text-center space-y-6"
       >
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -17,7 +17,7 @@ const page = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="masked text-4xl md:text-5xl font-bold"
         >
-          🚀 Upgrade to Pro
+          Upgrade to Pro
         </motion.h1>
 
         <motion.p
@@ -26,11 +26,11 @@ const page = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="text-lg md:text-xl text-zinc-300 leading-relaxed"
         >
-          Right now, I’m building these websites from scratch—every line of code, every feature.
+          Right now, I’m building websites from scratch - every line of code, every feature.
+          
+          Slowly - slowly, I’ll improve them - one upgrade by one.
           <br />
-          Slowly but surely, I’ll improve them—one upgrade at a time.
-          <br />
-          After that, I’ll start monetizing them. But I won't ask anyone to upgrade just yet.
+          After that, I’ll start monetizing them - after learning some other things.
         </motion.p>
 
         <motion.p
@@ -39,8 +39,8 @@ const page = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="text-lg md:text-xl text-zinc-300 leading-relaxed"
         >
-          Right now, it’s all new. I still have to integrate databases, polish the UI, fix bugs, and
-          add powerful new features. There's a *lot* to do.
+          Right now in this website, there is still a lot to do like I still have to integrate databases, polish the UI, fix bugs, and
+          add powerful new features. There's a lot to do.
         </motion.p>
 
         <motion.p
@@ -49,8 +49,8 @@ const page = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="text-lg md:text-xl text-zinc-300 leading-relaxed italic"
         >
-          Once enough people start using these tools, and the platform becomes solid—I’ll start earning.  
-          But not before. I’m not here to take shortcuts, I’m here to build something real.
+          Once enough people start using these tools, and the platform becomes solid and everything goes right  
+          But right now I am just building and learning stuffs for fun.
         </motion.p>
 
         <motion.div
@@ -59,7 +59,7 @@ const page = () => {
           transition={{ delay: 1, duration: 0.4 }}
           className="pt-4"
         >
-          <span className="text-sm text-zinc-500">👨‍💻 – Pratik, the Future Billionaire</span>
+          <span className="text-sm text-zinc-500">~ Pratik Jha</span>
         </motion.div>
       </motion.div>
     </div>

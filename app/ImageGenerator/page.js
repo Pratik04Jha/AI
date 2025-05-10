@@ -50,7 +50,7 @@ export default function Page() {
   const renderImageBox = (src, index) => (
     <div
       key={index}
-      className="relative group w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900"
+      className="relative group w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-black"
     >
       {loading ? (
         renderSkeleton()
@@ -78,7 +78,7 @@ export default function Page() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="flex flex-col items-center pt-24 min-h-screen bg-zinc-900 lg:pl-60 px-4 justify-center sm:pb-35 pb-40"
+      className="flex flex-col items-center pt-24 min-h-screen bg-black lg:pl-60 px-4 justify-center sm:pb-35 pb-40"
     >
       <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
         <div className="imagebox w-full max-w-[400px] h-[410px]">
@@ -101,17 +101,17 @@ export default function Page() {
       </div>
 
       {/* Textarea */}
-      <div className="fixed bottom-10 w-full max-w-[800px] px-4">
+      <div className="fixed bottom-10 w-full max-w-[850px] px-4">
         <div className="relative w-full">
           <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full h-24 px-6 py-4 pr-14 text-white outline-none rounded-[30px] resize-none bg-zinc-800"
+            className="flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border-1 border-zinc-700 text-white placeholder:text-white/50"
             placeholder="Eg: Generate an image of a futuristic city skyline with neon lights"
           />
           <button
-            className="bg-white text-black p-2 flex items-center justify-center rounded-full absolute bottom-3 right-3"
+            className="bg-white text-black p-2 flex items-center justify-center rounded-[10px] absolute bottom-4 right-3"
             onClick={generateImage}
           >
             <IoSend />

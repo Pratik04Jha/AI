@@ -70,7 +70,7 @@ export default function RootLayout({ children }) {
         <meta name="twitter:image" content="/icon.png" />
         <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
       </Head>
-      <body suppressHydrationWarning className="bg-zinc-900 overflow-x-hidden">
+      <body suppressHydrationWarning className="bg-black overflow-x-hidden">
         <ProgressBar />
         <Topbar />
         <Sidebar />

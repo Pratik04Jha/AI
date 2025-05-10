@@ -51,7 +51,7 @@ export default function QuoteGenerator() {
 
   return (
     <motion.div
-      className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4 justify-center"
+      className="flex flex-col items-center mt-10 h-screen md:pl-60 md:pt-15 md:pb-15 px-4 justify-center bg-black"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -67,13 +67,14 @@ export default function QuoteGenerator() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
+            className="min-h-48 flex items-center justify-center"
           >
-            Loading quote...
+            <p className="text-center">Loading quote...</p>
           </motion.p>
         ) : (
           <>
             <motion.div
-              className="bg-zinc-800 relative py-4 px-4 rounded-2xl min-h-40 items-center justify-center flex overflow-hidden"
+              className="bg-zinc-900/20 relative py-4 px-4 rounded-2xl min-h-40 items-center justify-center flex overflow-hidden"
               onMouseMove={handleQuoteHover}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -114,14 +115,14 @@ export default function QuoteGenerator() {
           <motion.button
             onClick={fetchQuote}
             onMouseMove={handleButtonHover}
-            className="relative z-10 bg-zinc-700 text-white px-8 py-2 rounded-lg cursor-pointer 
-            transition-transform transform active:scale-95 border-transparent hover:border-zinc-500 
+            className="relative z-10 bg-zinc-900 text-white px-8 py-2 rounded-lg cursor-pointer 
+            transition-transform transform active:scale-95 border-transparent hover:border-zinc-800 
             overflow-hidden text-sm md:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <div
-              className="absolute rounded-full bg-zinc-200 opacity-20 blur-[50px] transition-all duration-75"
+              className="absolute rounded-full bg-zinc-900 opacity-20 blur-[50px] transition-all duration-75"
               style={{
                 top: `${buttonHover.y - 50}px`,
                 left: `${buttonHover.x - 50}px`,

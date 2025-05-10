@@ -35,14 +35,13 @@ const ImagePreview = (props) => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className="h-[45%] md:h-[100%] w-full bg-zinc-800 rounded-lg overflow-hidden relative"
+      className="h-[45%] md:h-[100%] w-full bg-black rounded-lg overflow-hidden relative"
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {/* Shiny blob */}
       <div
-        className="absolute bg-zinc-200 blur-[200px] opacity-10 rounded-full transition-all duration-50"
+        className="absolute bg-zinc-100 blur-[200px] opacity-10 rounded-full transition-all duration-50"
         style={{
           top: `${cursorPos.y - 250}px`,
           left: `${cursorPos.x - 250}px`,
@@ -52,7 +51,6 @@ const ImagePreview = (props) => {
         }}
       />
 
-      {/* Label */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,7 +60,6 @@ const ImagePreview = (props) => {
         <h1>{label}</h1>
       </motion.div>
 
-      {/* Image / Loader / Message */}
       <div className="h-[90%] w-full flex justify-center items-center relative">
         {loading ? (
           <SkeletonLoader />
@@ -97,7 +94,7 @@ const ImagePreview = (props) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: delay + 0.3, duration: 0.4 }}
-            className="text-gray-400"
+            className="text-gray-400 font-normal"
           >
             No Image Selected
           </motion.div>
@@ -108,7 +105,7 @@ const ImagePreview = (props) => {
 
   return (
     <div className="flex justify-center h-screen pb-15 text-white w-full">
-      <div className="h-[75%] mt-15 w-full flex flex-col md:flex-row justify-center items-center gap-5">
+      <div className="h-[75%] mt-15 w-full flex flex-col md:flex-row justify-center items-center gap-5 font-semibold">
         {/* Uploaded Image */}
         {renderImageBox({
           src: props.uploaded,
@@ -122,7 +119,6 @@ const ImagePreview = (props) => {
           loading: false,
         })}
 
-        {/* Enhanced Image */}
         {renderImageBox({
           src: props.enhanced,
           hovering: hovering2,
