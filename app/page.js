@@ -10,7 +10,7 @@ function extractThinkingParts(content) {
   const thinkRegex = /<think>([\s\S]*?)<\/think>/gi;
   const thoughts = [];
   let visibleContent = content;
-  
+
   // Extract and remove thinking parts
   visibleContent = visibleContent.replace(thinkRegex, (match, thought) => {
     thoughts.push(thought.trim());
@@ -18,13 +18,10 @@ function extractThinkingParts(content) {
   });
 
   // Clean up the visible content
-  visibleContent = visibleContent
-    .replace(/\n{2,}/g, "\n")
-    .trim();
+  visibleContent = visibleContent.replace(/\n{2,}/g, "\n").trim();
 
   return { visibleContent, thoughts };
 }
-
 export default function Home() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -36,13 +33,13 @@ export default function Home() {
     if (!input.trim()) return;
 
     const userMessage = { role: "user", content: input };
-    const assistantMessage = { 
-      role: "assistant", 
+    const assistantMessage = {
+      role: "assistant",
       content: "",
       visibleContent: "",
       thoughts: [],
       isProcessing: true,
-      isStreaming: false
+      isStreaming: false,
     };
 
     setMessages((prev) => [...prev, userMessage, assistantMessage]);
@@ -75,7 +72,7 @@ export default function Home() {
 
       // Process the full content
       const { visibleContent, thoughts } = extractThinkingParts(fullContent);
-      
+
       // Update message with all data (but don't show yet)
       setMessages((prev) => {
         const updated = [...prev];
@@ -85,7 +82,7 @@ export default function Home() {
           visibleContent,
           thoughts,
           isProcessing: false,
-          isStreaming: true // Start streaming the visible content
+          isStreaming: true, // Start streaming the visible content
         };
         return updated;
       });
@@ -96,20 +93,19 @@ export default function Home() {
         setMessages((prev) => {
           const updated = [...prev];
           const currentMessage = updated[updated.length - 1];
-          
+
           if (displayedLength >= currentMessage.visibleContent.length) {
             clearInterval(streamingInterval);
             currentMessage.isStreaming = false;
           } else {
             displayedLength += 1;
-            currentMessage.displayedContent = 
+            currentMessage.displayedContent =
               currentMessage.visibleContent.substring(0, displayedLength);
           }
-          
+
           return updated;
         });
       }, 20); // Adjust typing speed here
-
     } catch (error) {
       console.error("Error:", error);
       setMessages((prev) => {
@@ -118,7 +114,7 @@ export default function Home() {
           ...updated[updated.length - 1],
           visibleContent: "⚠️ Something went wrong!",
           isProcessing: false,
-          isStreaming: false
+          isStreaming: false,
         };
         return updated;
       });
@@ -138,10 +134,18 @@ export default function Home() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const quickActions = [
+    { title: "Image Generation", link: "/ImageGeneration" },
+    { title: "Quote Generation", link: "/ImageGeneration" },
+    { title: "Image Enhancer", link: "/ImageGeneration" },
+    { title: "Background Remover", link: "/ImageGeneration" },
+    { title: "Video Generator", link: "/Explore" },
+  ];
+
   const inputVariants = {
     centered: {
       position: "absolute",
-      top: "60%",
+      top: "58%",
       left: "58%",
       x: "-50%",
       y: "-50%",
@@ -164,11 +168,47 @@ export default function Home() {
       },
     },
   };
+
+  const quickActionsVariants = {
+    hidden: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+      },
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 20,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const quickActionItemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+      },
+    },
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen md:pl-60 pt-15 relative">
       <div className="w-full h-full bg-black p-4 text-white pb-28">
         <div className="h-[90%] overflow-y-auto mb-4 px-4 md:px-60">
-        <AnimatePresence>
+          <AnimatePresence>
             {messages.length === 0 && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -181,7 +221,7 @@ export default function Home() {
                 }}
                 className="flex flex-col gap-8 justify-center items-center h-full w-full"
               >
-                <h1 className="font-bold text-[45px] leading-1 text-white text-center">
+                <h1 className="font-bold text-[45px] leading-1 text-white text-center mb-15">
                   What can I help you with?
                 </h1>
               </motion.div>
@@ -189,7 +229,8 @@ export default function Home() {
           </AnimatePresence>
           {messages.map((msg, index) => {
             const isAssistant = msg.role === "assistant";
-            const showThinkingProcess = showThoughtsFor[index] && msg.thoughts?.length > 0;
+            const showThinkingProcess =
+              showThoughtsFor[index] && msg.thoughts?.length > 0;
 
             return (
               <motion.div
@@ -202,44 +243,62 @@ export default function Home() {
                 <h1 className="font-bold pb-0">
                   {msg.role === "user" ? (
                     <div className="relative">
-                      <FaRegCircleUser size={20} className="absolute top-1 -left-8"/> You
+                      <FaRegCircleUser
+                        size={20}
+                        className="absolute top-1 -left-8"
+                      />{" "}
+                      You
                     </div>
                   ) : (
                     <div className="relative">
-                      <GiSlowBlob size={20} className="absolute top-1 -left-8"/> Zenius
+                      <GiSlowBlob
+                        size={20}
+                        className="absolute top-1 -left-8"
+                      />{" "}
+                      Zenius
                     </div>
                   )}
                 </h1>
 
-                <div className={`max-w-[75%] whitespace-pre-line text-white text-left`}>
+                <div
+                  className={`max-w-[95%] whitespace-pre-line text-white text-left`}
+                >
                   {isAssistant && msg.isProcessing ? (
-                    <div>Thinking...</div>
+                    <div className="animate-pulse">Thinking...</div>
                   ) : isAssistant ? (
                     <>
-                        {/* Final message with streaming effect */}
-                        
-                        {/* Thinking process toggle */}
+                      {/* Final message with streaming effect */}
+
+                      {/* Thinking process toggle */}
                       {!msg.isStreaming && msg.thoughts?.length > 0 && (
                         <div className="my-2 ">
                           <button
-                            onClick={() => setShowThoughtsFor(prev => ({
-                              ...prev,
-                              [index]: !prev[index]
-                            }))}
+                            onClick={() =>
+                              setShowThoughtsFor((prev) => ({
+                                ...prev,
+                                [index]: !prev[index],
+                              }))
+                            }
                             className="text-zinc-300 hover:text-white cursor-pointer "
                           >
-                            {showThinkingProcess ? "Thinking process" : "Thinking process"}
+                            {showThinkingProcess
+                              ? "Thinking process"
+                              : "Thinking process"}
                           </button>
                         </div>
-                        )}
-                         {/* Thinking content (hidden by default) */}
+                      )}
+                      {/* Thinking content (hidden by default) */}
                       <AnimatePresence>
                         {showThinkingProcess && (
                           <motion.div
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 120,
+                              damping: 18,
+                            }}
                             className="mt-2 text-sm text-gray-300 ml-1 p-3 border-l-2 border-l-zinc-700"
                           >
                             {msg.thoughts.map((thought, i) => (
@@ -247,18 +306,17 @@ export default function Home() {
                             ))}
                           </motion.div>
                         )}
-                        </AnimatePresence>
+                      </AnimatePresence>
                       <div>
                         <ReactMarkdown>
-                          {msg.isStreaming ? msg.displayedContent : msg.visibleContent}
+                          {msg.isStreaming
+                            ? msg.displayedContent
+                            : msg.visibleContent}
                         </ReactMarkdown>
-                        {msg.isStreaming && <span className="animate-pulse">|</span>}
+                        {msg.isStreaming && (
+                          <span className="animate-pulse">|</span>
+                        )}
                       </div>
-
-                      
-
-                     
-                        
                     </>
                   ) : (
                     // User message
@@ -272,38 +330,66 @@ export default function Home() {
           <div ref={bottomRef} />
         </div>
       </div>
+      <div className="">
+        <motion.div
+          variants={inputVariants}
+          initial="centered"
+          animate={messages.length > 0 ? "bottom" : "centered"}
+          className="w-full px-4 md:px-60 max-w-[1300px] z-10"
+        >
+          {/* Textarea Input */}
+          <div className="flex relative w-full">
+            <textarea
+              className={`flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border border-zinc-700 text-white placeholder:text-white/50 ${
+                loading ? "opacity-50" : ""
+              }`}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask anything"
+              disabled={loading}
+            />
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={sendMessage}
+              disabled={loading}
+              className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-3 ${
+                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+              }`}
+            >
+              <IoSend />
+            </motion.button>
+          </div>
 
-      <motion.div
-        variants={inputVariants}
-        initial="centered"
-        animate={messages.length > 0 ? "bottom" : "centered"}
-        className="w-full px-4 md:px-60 max-w-[1300px] z-10 "
-      >
-        <div className="flex relative w-full">
-          <textarea
-            className={`flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border-1 border-zinc-700 text-white placeholder:text-white/50 ${
-              loading ? "opacity-50" : ""
-            }`}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask anything"
-            disabled={loading}
-          />
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.05 }}
-            onClick={sendMessage}
-            disabled={loading}
-            className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-3 ${
-              loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-            }`}
-          >
-            <IoSend />
-          </motion.button>
-        </div>
-      </motion.div>
+          {/* Quick Actions - Shown by default, hidden when messages exist */}
+          <AnimatePresence>
+            {messages.length === 0 && (
+              <motion.div
+                variants={quickActionsVariants}
+                initial="visible"
+                exit="hidden"
+                className="flex gap-2 mt-2 flex-wrap justify-center"
+              >
+                {quickActions.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={quickActionItemVariants}
+                    className="mb-2"
+                  >
+                    <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
+                      <a href={item.link} className="text-zinc-200">
+                        {item.title}
+                      </a>
+                    </h1>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
     </div>
   );
 }
