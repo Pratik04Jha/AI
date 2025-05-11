@@ -106,3 +106,7 @@
   transform: translate(-50%, -50%);
 }
 
+::selection{
+  background: rgb(157, 0, 157);
+  color: white;
+}

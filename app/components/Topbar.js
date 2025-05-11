@@ -52,7 +52,7 @@ const Topbar = () => {
             onClick={() => setShowDropdown(!showDropdown)}
             className="text-white rounded-lg font-extralight cursor-pointer"
           >
-            <FiSun size={25} />
+            {/* <FiSun size={25} /> */}
           </button>
           <button
             onClick={() => setShowDropdown(!showDropdown)}
@@ -132,7 +132,7 @@ const Topbar = () => {
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
             <button
-              className="absolute top-3 right-3 text-zinc-400 hover:text-red-500"
+              className="absolute top-3 right-3 text-zinc-400 cursor-pointer"
               onClick={() => setShowFeedbackModal(false)}
             >
               <FaTimes size={18} />
@@ -152,7 +152,7 @@ const Topbar = () => {
                   type="email"
                   required
                   className="w-full px-4 py-2 rounded-md bg-black/30 border border-white/20 focus:outline-none "
-                  placeholder="you@example.com"
+                  placeholder="Enter your email"
                 />
               </div>
               <div>
@@ -166,7 +166,7 @@ const Topbar = () => {
               </div>
               <button
                 type="submit"
-                className="w- py-2 px-4 m-auto cursor-pointer bg-white transition rounded-lg font-semibold text-black"
+                className="w-full py-2 px-4  cursor-pointer bg-white transition rounded-lg font-semibold text-black"
               >
                 Submit Feedback
               </button>
