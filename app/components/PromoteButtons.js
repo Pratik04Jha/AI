@@ -29,7 +29,7 @@ const PromoteButtons = ({ data }) => {
       <div
         className="relative rounded-lg px-5 py-6 cursor-pointer flex flex-col justify-center gap-4 overflow-hidden 
         w-full sm:w-[90%] md:w-[80%] lg:w-[30rem] h-auto 
-        bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out"
+        bg-white/5 transition-all duration-300 ease-in-out"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}

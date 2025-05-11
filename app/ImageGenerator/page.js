@@ -48,9 +48,12 @@ export default function Page() {
   );
 
   const renderImageBox = (src, index) => (
-    <div
+    <motion.div
       key={index}
       className="relative group w-full h-full rounded-xl overflow-hidden border border-zinc-700 bg-black"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.1 * index }}
     >
       {loading ? (
         renderSkeleton()
@@ -70,7 +73,7 @@ export default function Page() {
           </a>
         </>
       ) : null}
-    </div>
+    </motion.div>
   );
 
   return (
@@ -81,27 +84,32 @@ export default function Page() {
       className="flex flex-col items-center pt-24 min-h-screen bg-black lg:pl-60 px-4 justify-center sm:pb-35 pb-40"
     >
       <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-center w-full max-w-[900px]">
-        <div className="imagebox w-full max-w-[400px] h-[410px]">
+        <div className="w-full imagebox max-w-[400px] h-[410px]">
           {renderImageBox(imageSrcs[1], 1)}
         </div>
 
         <div className="flex flex-col gap-4 w-full max-w-[400px]">
           <div className="flex gap-4 flex-col sm:flex-row w-full">
-            <div className="imagebox w-full sm:w-[50%] h-[200px]">
+            <div className="w-full imagebox sm:w-[50%] h-[200px]">
               {renderImageBox(imageSrcs[0], 0)}
             </div>
-            <div className="imagebox w-full sm:w-[50%] h-[200px]">
+            <div className="w-full imagebox sm:w-[50%] h-[200px]">
               {renderImageBox(imageSrcs[2], 2)}
             </div>
           </div>
-          <div className="imagebox w-full h-[200px]">
+          <div className="w-full imagebox h-[200px]">
             {renderImageBox(imageSrcs[3], 3)}
           </div>
         </div>
       </div>
 
       {/* Textarea */}
-      <div className="fixed bottom-10 w-full max-w-[850px] px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.5 }}
+        className="fixed bottom-10 w-full max-w-[850px] px-4"
+      >
         <div className="relative w-full">
           <textarea
             value={prompt}
@@ -117,7 +125,7 @@ export default function Page() {
             <IoSend />
           </button>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

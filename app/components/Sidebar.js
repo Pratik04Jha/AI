@@ -15,6 +15,8 @@ import { MdOutlineExplore, MdOutlineSelfImprovement } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import { GrUpgrade } from "react-icons/gr";
+import { FiSearch, FiEdit } from "react-icons/fi";
+
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -34,16 +36,7 @@ const Sidebar = () => {
       title: "Image enhancer",
       src: "/ImageEnhancer",
     },
-    {
-      icon: <TbBackground />,
-      title: "Background remover",
-      src: "/BackgroundRemover",
-    },
-    {
-      icon: <FaPhotoVideo />,
-      title: "Video generator",
-      src: "/VideoGenerator",
-    },
+    
   ];
 
   const filteredLinks = LinksData.filter((item) =>
@@ -80,11 +73,11 @@ const Sidebar = () => {
 
       <aside
         className={`fixed top-0 left-0 h-screen bg-black border-r-[0.1px] border-zinc-800 z-[100000000]
-          transition-transform duration-300 ease-in-out
+          transition-transform duration-300 ease-in-out px-2
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:w-60 w-[75%] sm:w-[60%]`}
       >
-        <div className="flex justify-between pt-2 items-center relative">
+        <div className="flex justify-center pt-2 items-center relative">
           {!isSearching && (
             <Link href="/Home">
               <div className="p-2 ml-1 rounded-lg flex items-center transition-all cursor-pointer">
@@ -93,14 +86,14 @@ const Sidebar = () => {
             </Link>
           )}
 
-          <div className="flex items-center w-full">
+          <div className="flex items-center w-full ">
             {!isSearching && (
               <div className="flex items-center justify-end w-full">
                 <div
                   className="p-2 rounded-lg transition-all cursor-pointer"
                   onClick={() => setIsSearching(true)}
                 >
-                  <IoSearch color="#FFFFFF" size={25} />
+                  <FiSearch color="#FFFFFF" size={25} />
                 </div>
 
                 <div className="relative" ref={dropdownRef}>
@@ -108,7 +101,7 @@ const Sidebar = () => {
                     onClick={() => setShowDropdown(!showDropdown)}
                     className="p-2 rounded-lg cursor-pointer sm:mr-0 md:mr-0"
                   >
-                    <FaRegEdit color="#FFFFFF" size={25} />
+                    <FiEdit color="#FFFFFF" size={25} />
                   </div>
 
                   <div
@@ -139,37 +132,36 @@ const Sidebar = () => {
                 </div>
               </div>
             )}
-            <div className={`flex border-1 border-zinc-600  rounded-[60px]
+            <div
+              className={`flex border-1 border-zinc-600  rounded-[60px]
                 ${
-                  isSearching
-                    ? "w-52 ml-4 opacity-100"
-                    : "w-0 ml-0 opacity-0"
-                }`}>
-              
-            <input
-              type="text"
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className={`bg-zinc-900 text-white px-3 py-2 text-sm rounded-[60px_0px_0px_60px] transition-all duration-300 ease-in-out outline-none 
+                  isSearching ? "w-52 ml-2 opacity-100" : "w-0 ml-0 opacity-0"
+                }`}
+            >
+              <input
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className={`bg-zinc-900 text-white px-3 py-2 text-sm rounded-[60px_0px_0px_60px] transition-all duration-300 ease-in-out outline-none 
                 ${
                   isSearching
                     ? "w-40 opacity-100"
                     : "w-0 opacity-0 pointer-events-none"
                 }`}
-            />
-            {isSearching && (
-              <div
-                className="p-2 rounded-lg cursor-pointer"
-                onClick={() => {
-                  setIsSearching(false);
-                  setSearch("");
-                }}
-              >
-                <IoMdClose color="#FFFFFF" size={22} />
-              </div>
-            )}
-</div>
+              />
+              {isSearching && (
+                <div
+                  className="p-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setIsSearching(false);
+                    setSearch("");
+                  }}
+                >
+                  <IoMdClose color="#FFFFFF" size={22} />
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="md:hidden absolute top-5 bg-zinc-800 p-2 rounded-lg right-2">
@@ -183,7 +175,7 @@ const Sidebar = () => {
 
         <Link href="/Home">
           <button
-            className={`cursor-pointer py-2 w-full text-left rounded-lg mt-2 flex gap-2 px-4 items-center transition-all
+            className={`cursor-pointer py-2 w-full text-left rounded-lg mt-2 flex gap-2 px-4  items-center transition-all
               ${
                 pathname === "/Home"
                   ? "bg-zinc-800 text-white"

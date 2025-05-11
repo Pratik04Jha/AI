@@ -35,7 +35,7 @@ const ImagePreview = (props) => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className="h-[45%] md:h-[100%] w-full bg-black rounded-lg overflow-hidden relative"
+      className="h-[45%] md:h-[100%] w-full bg-black rounded-lg overflow-hidden relative border-1 border-zinc-800 "
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

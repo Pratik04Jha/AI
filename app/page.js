@@ -170,25 +170,31 @@ export default function Home() {
   };
 
   const quickActionsVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+        delay: 0.3
+      }
+    }
+  };
+
+  const initialLoadVariants = {
     hidden: {
       y: 50,
       opacity: 0,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20,
-      },
     },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 200,
-        damping: 20,
-        staggerChildren: 0.1,
-      },
-    },
+        stiffness: 120,
+        damping: 15,
+      }
+    }
   };
 
   const quickActionItemVariants = {
@@ -339,59 +345,87 @@ export default function Home() {
         >
           {/* Textarea Input */}
           <div className="flex relative w-full">
-            <textarea
-              className={`
-    flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 rounded-[10px] resize-none 
-    bg-[#050505] text-white placeholder:text-white/70 border border-zinc-700
-    transition-all duration-300 ease-in-out 
-    focus:outline-none focus:ring-1 focus:ring-zinc-600/30 focus:ring-offset-0 focus:ring-offset-[#050505]
-    ${loading ? "opacity-50" : ""}
-  `}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask anything"
-              disabled={loading}
-            />
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05 }}
-              onClick={sendMessage}
-              disabled={loading}
-              className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-3 ${
-                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-              }`}
-            >
-              <IoSend />
-            </motion.button>
-          </div>
+  <motion.div
+    initial="hidden"
+    animate="visible"
+    variants={initialLoadVariants}
+    className="w-full"
+  >
+    <textarea
+      className={`
+        flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 rounded-[10px] resize-none 
+        bg-[#050505] text-white placeholder:text-white/70 border border-zinc-700
+        transition-all duration-300 ease-in-out 
+        focus:outline-none focus:ring-1 focus:ring-zinc-600/30 focus:ring-offset-0 focus:ring-offset-[#050505]
+        ${loading ? "opacity-50" : ""}
+      `}
+      type="text"
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      onKeyDown={handleKeyDown}
+      placeholder="Ask anything"
+      disabled={loading}
+    />
+  </motion.div>
+  <motion.button
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{
+      type: "spring",
+      stiffness: 200,
+      damping: 15,
+      delay: 0.2
+    }}
+    whileTap={{ scale: 0.9 }}
+    whileHover={{ scale: 1.05 }}
+    onClick={sendMessage}
+    disabled={loading}
+    className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-3 ${
+      loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+    }`}
+  >
+    <IoSend />
+  </motion.button>
+</div>
 
-          {/* Quick Actions - Shown by default, hidden when messages exist */}
-          <AnimatePresence>
-            {messages.length === 0 && (
-              <motion.div
-                variants={quickActionsVariants}
-                initial="visible"
-                exit="hidden"
-                className="flex gap-2 mt-2 flex-wrap justify-center"
-              >
-                {quickActions.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={quickActionItemVariants}
-                    className="mb-2"
-                  >
-                    <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
-                      <a href={item.link} className="text-zinc-200">
-                        {item.title}
-                      </a>
-                    </h1>
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+{/* Quick Actions */}
+<AnimatePresence>
+  {messages.length === 0 && (
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={quickActionsVariants}
+      exit="hidden"
+      className="flex gap-2 mt-2 flex-wrap justify-center"
+    >
+      {quickActions.map((item, index) => (
+        <motion.div
+          key={index}
+          variants={quickActionItemVariants}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+              delay: 0.1 * index + 0.4 // Staggered delay
+            }
+          }}
+          className="mb-2"
+        >
+          <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
+            <a href={item.link} className="text-zinc-200">
+              {item.title}
+            </a>
+          </h1>
+        </motion.div>
+      ))}
+    </motion.div>
+  )}
+</AnimatePresence>
+
         </motion.div>
       </div>
     </div>
