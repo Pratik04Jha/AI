@@ -16,6 +16,7 @@ import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
 import { GrUpgrade } from "react-icons/gr";
 import { FiSearch, FiEdit } from "react-icons/fi";
+import { TfiHome } from "react-icons/tfi";
 
 
 const Sidebar = () => {
@@ -182,8 +183,8 @@ const Sidebar = () => {
                   : "text-[#FFFFFF] "
               }`}
           >
-            <GiSlowBlob />
-            Zenius AI
+            <TfiHome />
+            Home
           </button>
         </Link>
         <Link href="/Explore">

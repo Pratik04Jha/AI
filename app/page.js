@@ -380,7 +380,7 @@ export default function Home() {
     whileHover={{ scale: 1.05 }}
     onClick={sendMessage}
     disabled={loading}
-    className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-3 ${
+    className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-2 ${
       loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
     }`}
   >
