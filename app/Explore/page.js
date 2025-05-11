@@ -70,7 +70,7 @@ const Page = () => {
 
   return (
     <div className="flex w-full flex-col items-center min-h-screen sm:pl-60 pt-24 px-4 text-white bg-black transition-all duration-300 ease-in-out">
-      {/* 🚀 BIG BADASS HEADING */}
+      {/* BIG BADASS HEADING */}
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ const Page = () => {
         Explore Tools
       </motion.h1>
 
-      {/* 🔍 Search Input */}
+      {/* Search Input */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ const Page = () => {
         />
       </motion.div>
 
-      {/* 🧩 Products Grid */}
+      {/* Products Grid */}
       <div className="w-full sm:px-20 flex flex-wrap justify-center gap-6 pb-40">
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => (
@@ -118,12 +118,12 @@ const Page = () => {
             animate={{ opacity: 1 }}
             className="text-white/70 w-full text-center text-lg mt-20"
           >
-            No result found... 🫠 Try another word!
+            No result found
           </motion.p>
         )}
       </div>
 
-      {/* 🦶 Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

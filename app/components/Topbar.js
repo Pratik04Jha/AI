@@ -108,20 +108,46 @@ const Topbar = () => {
               transition={{ duration: 0.3 }}
             >
               {[
-                { icon: <ImSphere size={40} />, title: "Main" },
-                { icon: <TbBrandAppleArcade size={40} />, title: "Arcade" },
-                { icon: <GiSlowBlob size={40} />, title: "AI Website" },
-                { icon: <PiSphereDuotone size={40} />, title: "Portfolio" },
-                { icon: <RiBloggerLine size={40} />, title: "Blog" },
-                { icon: <TbAutomation size={40} />, title: "Automation" },
+                {
+                  icon: <ImSphere size={40} />,
+                  title: "Main",
+                  link: "https://main-website-9re5rheox-pratik04jha.vercel.app/ ",
+                },
+                {
+                  icon: <TbBrandAppleArcade size={40} />,
+                  title: "Arcade",
+                  link: "https://arcade-zeta.vercel.app/",
+                },
+                {
+                  icon: <GiSlowBlob size={40} />,
+                  title: "AI Website",
+                  link: "/",
+                },
+                {
+                  icon: <PiSphereDuotone size={40} />,
+                  title: "Portfolio",
+                  link: "https://pratik-the-legend.vercel.app/",
+                },
+                {
+                  icon: <RiBloggerLine size={40} />,
+                  title: "Blog",
+                  link: "/Home",
+                },
+                {
+                  icon: <TbAutomation size={40} />,
+                  title: "Automation",
+                  link: "/Home",
+                },
               ].map((data, i) => (
-                <div
+                <Link
+                  href={data.link}
+                  target="_blank"
                   key={i}
                   className={`h-20 flex flex-col justify-center items-center gap-2 rounded-lg hover:bg-zinc-800 transition duration-200 hover:scale-105 cursor-pointer`}
                 >
                   {data.icon}
                   {data.title}
-                </div>
+                </Link>
               ))}
             </motion.div>
           )}
