@@ -5,6 +5,7 @@ import { GiSlowBlob } from "react-icons/gi";
 import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRegCircleUser } from "react-icons/fa6";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function extractThinkingParts(content) {
   const thinkRegex = /<think>([\s\S]*?)<\/think>/gi;
@@ -40,6 +41,7 @@ export default function Home() {
       thoughts: [],
       isProcessing: true,
       isStreaming: false,
+      startTime: Date.now(), // Track when thinking starts
     };
 
     setMessages((prev) => [...prev, userMessage, assistantMessage]);
@@ -73,7 +75,7 @@ export default function Home() {
       // Process the full content
       const { visibleContent, thoughts } = extractThinkingParts(fullContent);
 
-      // Update message with all data (but don't show yet)
+      // Update message with all data
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
@@ -82,13 +84,14 @@ export default function Home() {
           visibleContent,
           thoughts,
           isProcessing: false,
-          isStreaming: true, // Start streaming the visible content
+          isStreaming: true,
+          displayedContent: "", // Initialize displayedContent
         };
         return updated;
       });
 
       // Now stream the visible content
-      let displayedLength = 0;
+      let displayedLength = 0; // Properly declared here
       const streamingInterval = setInterval(() => {
         setMessages((prev) => {
           const updated = [...prev];
@@ -97,6 +100,7 @@ export default function Home() {
           if (displayedLength >= currentMessage.visibleContent.length) {
             clearInterval(streamingInterval);
             currentMessage.isStreaming = false;
+            currentMessage.endTime = Date.now(); // Track when thinking ends
           } else {
             displayedLength += 1;
             currentMessage.displayedContent =
@@ -105,7 +109,7 @@ export default function Home() {
 
           return updated;
         });
-      }, 20); // Adjust typing speed here
+      }, 20);
     } catch (error) {
       console.error("Error:", error);
       setMessages((prev) => {
@@ -115,6 +119,7 @@ export default function Home() {
           visibleContent: "⚠️ Something went wrong!",
           isProcessing: false,
           isStreaming: false,
+          endTime: Date.now(),
         };
         return updated;
       });
@@ -171,14 +176,14 @@ export default function Home() {
 
   const quickActionsVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: {
         when: "beforeChildren",
         staggerChildren: 0.1,
-        delay: 0.3
-      }
-    }
+        delay: 0.3,
+      },
+    },
   };
 
   const initialLoadVariants = {
@@ -193,8 +198,8 @@ export default function Home() {
         type: "spring",
         stiffness: 120,
         damping: 15,
-      }
-    }
+      },
+    },
   };
 
   const quickActionItemVariants = {
@@ -227,7 +232,7 @@ export default function Home() {
                 }}
                 className="flex flex-col gap-8 justify-center items-center h-full w-full"
               >
-                <h1 className="font-bold text-[45px] leading-1 text-white text-center mb-15">
+                <h1 className="font-bold text-[45px] leading-1 text-white text-center mb-20">
                   What can I help you with?
                 </h1>
               </motion.div>
@@ -277,7 +282,7 @@ export default function Home() {
 
                       {/* Thinking process toggle */}
                       {!msg.isStreaming && msg.thoughts?.length > 0 && (
-                        <div className="my-2 ">
+                        <div className="my-2">
                           <button
                             onClick={() =>
                               setShowThoughtsFor((prev) => ({
@@ -285,11 +290,15 @@ export default function Home() {
                                 [index]: !prev[index],
                               }))
                             }
-                            className="text-zinc-300 hover:text-white cursor-pointer "
+                            className="text-zinc-300 hover:text-white cursor-pointer flex items-center gap-1"
                           >
-                            {showThinkingProcess
-                              ? "Thinking process"
-                              : "Thinking process"}
+                            Thought for{" "}
+                            {Math.round((msg.endTime - msg.startTime) / 1000)}s
+                            {showThinkingProcess ? (
+                              <IoIosArrowUp />
+                            ) : (
+                              <IoIosArrowDown />
+                            )}
                           </button>
                         </div>
                       )}
@@ -345,87 +354,86 @@ export default function Home() {
         >
           {/* Textarea Input */}
           <div className="flex relative w-full">
-  <motion.div
-    initial="hidden"
-    animate="visible"
-    variants={initialLoadVariants}
-    className="w-full"
-  >
-    <textarea
-      className={`
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={initialLoadVariants}
+              className="w-full"
+            >
+              <textarea
+                className={`
         flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 rounded-[10px] resize-none 
         bg-[#050505] text-white placeholder:text-white/70 border border-zinc-700
         transition-all duration-300 ease-in-out 
         focus:outline-none focus:ring-1 focus:ring-zinc-600/30 focus:ring-offset-0 focus:ring-offset-[#050505]
         ${loading ? "opacity-50" : ""}
       `}
-      type="text"
-      value={input}
-      onChange={(e) => setInput(e.target.value)}
-      onKeyDown={handleKeyDown}
-      placeholder="Ask anything"
-      disabled={loading}
-    />
-  </motion.div>
-  <motion.button
-    initial={{ scale: 0 }}
-    animate={{ scale: 1 }}
-    transition={{
-      type: "spring",
-      stiffness: 200,
-      damping: 15,
-      delay: 0.2
-    }}
-    whileTap={{ scale: 0.9 }}
-    whileHover={{ scale: 1.05 }}
-    onClick={sendMessage}
-    disabled={loading}
-    className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-2 ${
-      loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-    }`}
-  >
-    <IoSend />
-  </motion.button>
-</div>
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Ask anything"
+                disabled={loading}
+              />
+            </motion.div>
+            <motion.button
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.2,
+              }}
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={sendMessage}
+              disabled={loading}
+              className={`bg-white text-black p-2 outline-none flex items-center justify-center rounded-[10px] absolute bottom-3 right-2 ${
+                loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+              }`}
+            >
+              <IoSend />
+            </motion.button>
+          </div>
 
-{/* Quick Actions */}
-<AnimatePresence>
-  {messages.length === 0 && (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={quickActionsVariants}
-      exit="hidden"
-      className="flex gap-2 mt-2 flex-wrap justify-center"
-    >
-      {quickActions.map((item, index) => (
-        <motion.div
-          key={index}
-          variants={quickActionItemVariants}
-          initial={{ y: 20, opacity: 0 }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            transition: {
-              type: "spring",
-              stiffness: 300,
-              damping: 20,
-              delay: 0.1 * index + 0.4 // Staggered delay
-            }
-          }}
-          className="mb-2"
-        >
-          <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
-            <a href={item.link} className="text-zinc-200">
-              {item.title}
-            </a>
-          </h1>
-        </motion.div>
-      ))}
-    </motion.div>
-  )}
-</AnimatePresence>
-
+          {/* Quick Actions */}
+          <AnimatePresence>
+            {messages.length === 0 && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={quickActionsVariants}
+                exit="hidden"
+                className="flex gap-2 mt-2 flex-wrap justify-center"
+              >
+                {quickActions.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={quickActionItemVariants}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                        delay: 0.1 * index + 0.4, // Staggered delay
+                      },
+                    }}
+                    className="mb-2"
+                  >
+                    <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
+                      <a href={item.link} className="text-zinc-200">
+                        {item.title}
+                      </a>
+                    </h1>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </div>
