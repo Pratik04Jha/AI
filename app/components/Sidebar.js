@@ -87,7 +87,7 @@ const Sidebar = () => {
         <div className="flex justify-between pt-2 items-center relative">
           {!isSearching && (
             <Link href="/Home">
-              <div className="p-2 ml-3 rounded-lg flex items-center transition-all cursor-pointer">
+              <div className="p-2 ml-1 rounded-lg flex items-center transition-all cursor-pointer">
                 <GiSlowBlob color="#FFFFFF" size={25} />
               </div>
             </Link>
@@ -139,31 +139,37 @@ const Sidebar = () => {
                 </div>
               </div>
             )}
-
-            {isSearching && (
-              <div
-                className="p-2 rounded-lg hover:bg-zinc-800 cursor-pointer"
-                onClick={() => {
-                  setIsSearching(false);
-                  setSearch("");
-                }}
-              >
-                <IoMdClose color="#D1D1D1" size={22} />
-              </div>
-            )}
-
+            <div className={`flex border-1 border-zinc-600  rounded-[60px]
+                ${
+                  isSearching
+                    ? "w-52 ml-4 opacity-100"
+                    : "w-0 ml-0 opacity-0"
+                }`}>
+              
             <input
               type="text"
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className={`bg-zinc-800 text-white px-3 py-1 text-sm rounded transition-all duration-300 ease-in-out outline-none
+              className={`bg-zinc-900 text-white px-3 py-2 text-sm rounded-[60px_0px_0px_60px] transition-all duration-300 ease-in-out outline-none 
                 ${
                   isSearching
-                    ? "w-36 opacity-100"
+                    ? "w-40 opacity-100"
                     : "w-0 opacity-0 pointer-events-none"
                 }`}
             />
+            {isSearching && (
+              <div
+                className="p-2 rounded-lg cursor-pointer"
+                onClick={() => {
+                  setIsSearching(false);
+                  setSearch("");
+                }}
+              >
+                <IoMdClose color="#FFFFFF" size={22} />
+              </div>
+            )}
+</div>
           </div>
 
           <div className="md:hidden absolute top-5 bg-zinc-800 p-2 rounded-lg right-2">
@@ -177,7 +183,7 @@ const Sidebar = () => {
 
         <Link href="/Home">
           <button
-            className={`cursor-pointer py-2 w-full text-left rounded-lg mt-5 flex gap-2 px-4 items-center transition-all
+            className={`cursor-pointer py-2 w-full text-left rounded-lg mt-2 flex gap-2 px-4 items-center transition-all
               ${
                 pathname === "/Home"
                   ? "bg-zinc-800 text-white"
@@ -221,9 +227,7 @@ const Sidebar = () => {
             className="flex items-center justify-between w-full px-5 py-2 text-white text-[15px] font-semibold  rounded-lg cursor-pointer transition-all"
             onClick={() => setShowProductsDropdown(!showProductsDropdown)}
           >
-            <div className="flex items-center gap-2">
-              Products
-            </div>
+            <div className="flex items-center gap-2">Products</div>
             {showProductsDropdown ? (
               <IoMdArrowDropup size={20} />
             ) : (
@@ -264,7 +268,7 @@ const Sidebar = () => {
         {/* <p className="text-white">History</p> */}
 
         <Link href="/UpgradeToPro">
-          <button className="absolute bottom-0 py-3 cursor-pointer w-full text-[#FFFFFF] text-left flex gap-2 px-4 items-center hover:bg-zinc-900">
+          <button className="absolute bottom-0 py-3 cursor-pointer w-full text-[#FFFFFF] text-left flex gap-2 px-4 items-center ">
             <GrUpgrade />
             Upgrade to Pro
           </button>

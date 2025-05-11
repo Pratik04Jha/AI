@@ -15,14 +15,14 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.2,
+      delay: i * 0.15,
       duration: 0.6,
       ease: "easeOut",
     },
   }),
 };
 
-const page = () => {
+const Page = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const data = [
@@ -30,31 +30,37 @@ const page = () => {
       imageIcon: <GiSlowBlob color="#D1D1D1" size={70} />,
       productSrc: "/",
       heading: "ChatBOT",
+      description: "Talk with an intelligent AI that answers like your genius bro.",
     },
     {
       imageIcon: <FaImages color="#D1D1D1" size={70} />,
       productSrc: "/ImageGenerator",
       heading: "Image generator",
+      description: "Turn words into beautiful images using AI magic. Literally.",
     },
     {
       imageIcon: <MdOutlineSelfImprovement color="#D1D1D1" size={80} />,
       productSrc: "/ImageEnhancer",
       heading: "Image enhancer",
+      description: "Sharpen, upscale, and HD-ify your images with one click.",
     },
     {
       imageIcon: <BsFillChatQuoteFill color="#D1D1D1" size={70} />,
       productSrc: "/QuoteGenerator",
       heading: "Quotes generator",
+      description: "Generate deep, inspirational, or funny quotes in seconds.",
     },
     {
       imageIcon: <TbBackground color="#D1D1D1" size={70} />,
       productSrc: "/BackgroundRemover",
       heading: "Background remover",
+      description: "Remove any image background instantly, clean and crisp.",
     },
     {
       imageIcon: <FaPhotoVideo color="#D1D1D1" size={70} />,
       productSrc: "/VideoGenerator",
       heading: "Video generator",
+      description: "Create AI-powered videos from text, images, or your imagination.",
     },
   ];
 
@@ -63,45 +69,35 @@ const page = () => {
   );
 
   return (
-    <div className="flex flex-col items-center min-h-screen sm:pl-60 pt-20 sm:pt-15 text-white">
-      <motion.div
-        className="w-full sm:px-60 px-6 flex flex-col items-center text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
+    <div className="flex w-full flex-col items-center min-h-screen sm:pl-60 pt-24 px-4 text-white bg-black transition-all duration-300 ease-in-out">
+      {/* 🚀 BIG BADASS HEADING */}
+      <motion.h1
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="text-4xl sm:text-6xl font-extrabold text-center mb-12 text-white drop-shadow-xl tracking-tight"
       >
-        <h1 className="text-4xl sm:text-7xl font-bold py-5 mt-4">Explore</h1>
-        <p className="sm:w-[70%] text-sm sm:text-base text-white/90">
-          Step into the ever-evolving, mind-blowing world of AI tools crafted
-          specifically for creators like you — a realm where imagination meets
-          innovation, and with just a few effortless clicks, you can build
-          powerful digital experiences, enhance your creative projects to pro
-          levels, and breathe life into ideas that once only lived in your
-          wildest dreams.
-        </p>
-      </motion.div>
+        Explore Tools
+      </motion.h1>
 
-      {/* Search Input */}
+      {/* 🔍 Search Input */}
       <motion.div
-        className="w-full sm:px-60 px-6 py-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={fadeUp}
-        custom={2}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="w-full sm:w-1/2 mb-10"
       >
         <input
           type="text"
+          placeholder="Search your tool..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="h-10 w-full sm:w-[100%] px-4 sm:px-6 py-2 rounded-lg border border-white/50 outline-none bg-transparent text-white placeholder-white/50"
-          placeholder="Search the products here"
+          className="w-full py-3 px-6 rounded-xl bg-zinc-900/30 border border-zinc-800 text-white placeholder-white/60 focus:outline-none focus:ring-1 focus:ring-zinc-700 focus:border-zinc-700 shadow-xl transition-all duration-300"
         />
       </motion.div>
 
-      {/* Products Grid */}
-      <div className="w-full sm:px-20 px-4 flex flex-wrap justify-center gap-6 sm:gap-8 py-10 pb-40">
+      {/* 🧩 Products Grid */}
+      <div className="w-full sm:px-20 flex flex-wrap justify-center gap-6 pb-40">
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => (
             <motion.div
@@ -111,20 +107,26 @@ const page = () => {
               viewport={{ once: true, amount: 0.1 }}
               variants={fadeUp}
               custom={index + 3}
+              className="hover:scale-105 transition-transform duration-300 ease-out"
             >
               <Products data={item} />
             </motion.div>
           ))
         ) : (
-          <p className="text-white/70 w-1/2 text-center text-lg">
-            No result found...
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-white/70 w-full text-center text-lg mt-20"
+          >
+            No result found... 🫠 Try another word!
+          </motion.p>
         )}
       </div>
 
+      {/* 🦶 Footer */}
       <Footer />
     </div>
   );
 };
 
-export default page;
+export default Page;

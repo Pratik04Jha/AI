@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
@@ -8,7 +8,7 @@ const Products = ({ data }) => {
   const [lastPos, setLastPos] = useState(null);
 
   useEffect(() => {
-    setLastPos({ x: 35, y: 25 });
+    setLastPos({ x: 100, y: 80 });
   }, []);
 
   const handleMouseMove = (e) => {
@@ -19,37 +19,48 @@ const Products = ({ data }) => {
     setLastPos({ x, y });
   };
 
-  // Handle mouse leave
   const handleMouseLeave = () => {
     setHovering(false);
     setCursorPos(lastPos);
   };
 
   return (
-    <Link href={data.productSrc}>
+    <Link href={data.productSrc} className="group">
       <div
-        className="relative border-1 border-zinc-700/60 h-50 w-70 rounded-lg px-5 cursor-pointer flex items-center flex-col justify-center gap-5 overflow-hidden"
+        className="relative h-[300px] w-72 sm:w-80 rounded-3xl cursor-pointer flex flex-col items-center justify-center px-6 py-8 gap-4 transition-all duration-500 ease-out border border-white/10 backdrop-blur-xl  hover:shadow-xl hover:border-white/20 hover:scale-[1.03] overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={handleMouseLeave}
       >
+        {/* Glowing Cursor Blob */}
         {lastPos && (
           <div
-            className="absolute bg-zinc-200 blur-2xl opacity-10 rounded-full transition-all duration-300 ease-out"
+            className="absolute bg-zinc-400 blur-[100px] opacity-20 rounded-full transition-all duration-500 ease-out pointer-events-none"
             style={{
               top: `${(hovering ? cursorPos.y : lastPos?.y) - 100}px`,
               left: `${(hovering ? cursorPos.x : lastPos?.x) - 100}px`,
               width: "200px",
               height: "200px",
-              pointerEvents: "none",
             }}
           />
         )}
 
-        {data.imageIcon}
-        <h1 className="font-bold text-2xl text-center leading-7 text-white/90">
+
+
+        {/* Icon */}
+        <div className="z-10 scale-100 group-hover:scale-110 transition-transform duration-300">
+          {data.imageIcon}
+        </div>
+
+        {/* Heading */}
+        <h1 className="font-semibold text-xl sm:text-2xl text-center text-white drop-shadow-sm z-10">
           {data.heading}
         </h1>
+
+        {/* Description */}
+        <p className="text-sm text-center text-white/70 leading-relaxed z-10 max-w-xs tracking-wide">
+          {data.description}
+        </p>
       </div>
     </Link>
   );

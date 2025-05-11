@@ -107,7 +107,7 @@ export default function Page() {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border-1 border-zinc-700 text-white placeholder:text-white/50"
+            className="flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border-1 border-zinc-700 text-white placeholder:text-white/50 focus:outline-none focus:ring-1 focus:ring-zinc-600/30 focus:ring-offset-0 focus:ring-offset-[#050505]"
             placeholder="Eg: Generate an image of a futuristic city skyline with neon lights"
           />
           <button

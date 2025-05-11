@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { MdOutlineFeedback } from "react-icons/md";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 
 const Topbar = () => {
@@ -33,12 +34,13 @@ const Topbar = () => {
 
   return (
     <div className="flex h-15 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-black text-white sm:pl-65 pl-20 ">
+      <button className="text-white py-1 px-6 rounded-2xl border-1 border-white/50 cursor-pointer">Feedback</button>
       <div className="hidden sm:flex gap-5 items-center justify-end w-full " ref={dropdownRef}>
         <button
           onClick={() => setShowDropdown(!showDropdown)}
           className=" text-white rounded-lg  font-extralight cursor-pointer"
         >
-          <MdOutlineFeedback size={25} />
+          <FiSun size={25} />
         </button>
         <button
           onClick={() => setShowDropdown(!showDropdown)}

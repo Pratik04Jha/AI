@@ -86,13 +86,9 @@ const page = () => {
           viewport={{ once: true }}
           className="flex justify-center"
         >
-          <p className="w-full md:w-[70%] text-white/80 pt-5 text-center text-sm sm:text-base">
-            Uncover the journey behind this AI-powered world — crafted by a
-            16-year-old driven by pure passion, boundless curiosity, and a love
-            for turning dreams into code. Explore how I brought this vision to
-            life, with every tool, tech, and API listed for fellow creators. I’m
-            proud of what I’ve built — and if it inspires you, you can show love
-            and support through my social media handles.
+          <p className="w-full md:w-[50%] text-white/80 pt-5 text-center text-sm sm:text-base">
+          Uncover the journey behind this AI-powered universe — created by a 16-year-old dreamer fueled by passion, curiosity, and a deep love for turning imagination into code. This isn’t just a site, it’s my soul in pixels.
+
           </p>
         </motion.div>
 
@@ -165,13 +161,17 @@ const page = () => {
             <h1 className="text-lg sm:text-xl md:text-2xl text-center md:text-left">
               Read my journey –
             </h1>
-            <Link href="/coming.png" target="_blank">
-              <button className="changed relative overflow-hidden text-base sm:text-lg md:text-2xl py-5 px-18 sm:py-4 sm:px-40 md:py-10 md:px-32 cursor-pointer hover:scale-[1.05] transition-all duration-300 ease-in-out bg-amber-50 text-black rounded-[100px] flex items-center justify-center">
-                <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-10 text-white mix-blend-difference whitespace-nowrap">
-                  Blog post
-                </span>
-              </button>
-            </Link>
+            <div className="relative group w-fit my-10">
+          <div className="relative p-[3px] sm:p-[4px] md:p-[5px] px-[6px] sm:px-[8px] md:px-[10px] rounded-[100px] overflow-hidden">
+            <div className="absolute -inset-100 z-0 rounded-[100px] bg-[conic-gradient(from_0deg,red,orange,yellow,green,cyan,blue,violet,red)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow pointer-events-none" />
+
+            <button className="changed relative overflow-hidden text-sm sm:text-base md:text-lg lg:text-2xl py-6 px-16 sm:py-4 sm:px-20 md:py-10 md:px-32 cursor-pointer hover:scale-[1.05] transition-all duration-300 ease-in-out bg-amber-50 text-black rounded-[100px] flex items-center justify-center z-20">
+              <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-30 text-white mix-blend-difference whitespace-nowrap">
+                Blog Post
+              </span>
+            </button>
+          </div>
+        </div>
           </div>
         </motion.div>
 

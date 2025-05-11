@@ -44,7 +44,7 @@ const page = () => {
             </span>
             <br />
             From chatting with AI to creating stunning images, enhancing
-            quality, and more — our smart tools help you work quicker, think
+            quality, and more - our smart tools help you work quicker, think
             sharper, and create better. No noise, just pure AI magic. Ready to
             begin? Let’s roll!
           </p>
@@ -62,18 +62,22 @@ const page = () => {
         ))}
       </div>
 
-      <FadeInWhenVisible delay={0.6}>
+      <FadeInWhenVisible delay={0.2}>
         <div className="flex flex-col md:flex-row w-full justify-center gap-5 items-center pb-40 ">
           <h1 className="text-lg sm:text-xl md:text-2xl text-center md:text-left">
             Github repository –
           </h1>
-          <Link href="https://github.com/Pratik04Jha/AI">
-          <button className="changed relative overflow-hidden text-base sm:text-lg md:text-2xl py-5 px-18 sm:py-4 sm:px-40 md:py-10 md:px-32 cursor-pointer hover:scale-[1.05] transition-all duration-300 ease-in-out bg-amber-50 text-black rounded-[100px] flex items-center justify-center">
-            <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-10 text-white mix-blend-difference whitespace-nowrap">
-              View code
-            </span>
-          </button>
-          </Link>
+          <div className="relative group w-fit my-10">
+          <div className="relative p-[3px] sm:p-[4px] md:p-[5px] px-[6px] sm:px-[8px] md:px-[10px] rounded-[100px] overflow-hidden">
+            <div className="absolute -inset-100 z-0 rounded-[100px] bg-[conic-gradient(from_0deg,red,orange,yellow,green,cyan,blue,violet,red)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-spin-slow pointer-events-none" />
+
+            <button className="changed relative overflow-hidden text-sm sm:text-base md:text-lg lg:text-2xl py-6 px-16 sm:py-4 sm:px-20 md:py-10 md:px-32 cursor-pointer hover:scale-[1.05] transition-all duration-300 ease-in-out bg-amber-50 text-black rounded-[100px] flex items-center justify-center z-20">
+              <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 z-30 text-white mix-blend-difference whitespace-nowrap">
+                View code
+              </span>
+            </button>
+          </div>
+        </div>
         </div>
       </FadeInWhenVisible>
 

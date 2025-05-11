@@ -340,9 +340,13 @@ export default function Home() {
           {/* Textarea Input */}
           <div className="flex relative w-full">
             <textarea
-              className={`flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 outline-none rounded-[10px] resize-none bg-[#050505] border border-zinc-700 text-white placeholder:text-white/50 ${
-                loading ? "opacity-50" : ""
-              }`}
+              className={`
+    flex-1 h-30 min-w-full px-5 py-3 pb-10 pr-14 rounded-[10px] resize-none 
+    bg-[#050505] text-white placeholder:text-white/70 border border-zinc-700
+    transition-all duration-300 ease-in-out 
+    focus:outline-none focus:ring-1 focus:ring-zinc-600/30 focus:ring-offset-0 focus:ring-offset-[#050505]
+    ${loading ? "opacity-50" : ""}
+  `}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}

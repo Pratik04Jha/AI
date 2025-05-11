@@ -27,7 +27,7 @@ const Technologies = ({ data }) => {
   return (
     <li
       ref={liRef}
-      className="relative h-50 w-50 rounded-full flex justify-center items-center text-2xl font-semibold cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105"
+      className="relative h-50 w-50 rounded-[40px] flex justify-center items-center text-2xl font-semibold cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={handleMouseLeave}
