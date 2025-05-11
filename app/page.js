@@ -140,11 +140,11 @@ export default function Home() {
   }, [messages]);
 
   const quickActions = [
-    { title: "Image Generation", link: "/ImageGeneration" },
-    { title: "Quote Generation", link: "/ImageGeneration" },
-    { title: "Image Enhancer", link: "/ImageGeneration" },
-    { title: "Background Remover", link: "/ImageGeneration" },
-    { title: "Video Generator", link: "/Explore" },
+    { title: "Image Generation", link: "/ImageGenerator" },
+    { title: "Quote Generation", link: "/QuoteGenerator" },
+    { title: "Image Enhancer", link: "/ImageEnhancer" },
+    { title: "Background Remover", link: "/BackgroundRemover" },
+    { title: "Video Generator", link: "/VideoGenerator" },
   ];
 
   const inputVariants = {
