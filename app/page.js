@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import  Link  from "next/link";
 
 function extractThinkingParts(content) {
   const thinkRegex = /<think>([\s\S]*?)<\/think>/gi;
@@ -425,9 +426,9 @@ export default function Home() {
                     className="mb-2"
                   >
                     <h1 className="font-semibold py-2 px-5 border border-zinc-600 rounded-[10px] hover:bg-zinc-900/50 cursor-pointer text-sm">
-                      <a href={item.link} className="text-zinc-200">
+                      <Link href={item.link} className="text-zinc-200">
                         {item.title}
-                      </a>
+                      </Link>
                     </h1>
                   </motion.div>
                 ))}

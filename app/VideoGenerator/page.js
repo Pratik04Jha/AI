@@ -4,12 +4,12 @@ import { motion } from 'framer-motion'
 
 const page = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center pl-60">
+    <div className="min-h-screen flex items-center justify-center pl-60  ">
       <motion.div
         initial={{ opacity: 0, y: 50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="bg-black text-white max-w-xl w-full rounded-2xl shadow-lg p-8 text-center space-y-6"
+        className="bg-zinc-900/40 text-white max-w-xl w-full rounded-2xl shadow-lg p-8 text-center space-y-6 border-1 border-zinc-800 "
       >
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
