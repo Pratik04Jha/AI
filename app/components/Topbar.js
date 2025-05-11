@@ -5,24 +5,36 @@ import Link from "next/link";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FiSun } from "react-icons/fi";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import { CgMenuGridO } from "react-icons/cg";
+import { ImSphere } from "react-icons/im";
+import { TbBrandAppleArcade } from "react-icons/tb";
+import { GiSlowBlob } from "react-icons/gi";
+import { PiSphereDuotone } from "react-icons/pi";
+import { RiBloggerLine } from "react-icons/ri";
+import { TbAutomation } from "react-icons/tb";
+import toast, { Toaster } from "react-hot-toast";
 
 const Topbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [showGridMenu, setShowGridMenu] = useState(false);
 
   const dropdownRef = useRef(null);
   const modalRef = useRef(null);
+  const gridMenuRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(false);
-        setMobileMenuOpen(false);
       }
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setShowFeedbackModal(false);
+      }
+      if (gridMenuRef.current && !gridMenuRef.current.contains(event.target)) {
+        setShowGridMenu(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -47,47 +59,98 @@ const Topbar = () => {
           Feedback
         </button>
 
-        <div className="hidden sm:flex gap-5 items-center justify-end w-full" ref={dropdownRef}>
+        <div className="hidden sm:flex gap-5 items-center justify-end w-full">
           <button
-            onClick={() => setShowDropdown(!showDropdown)}
+            onClick={() => {
+              setShowGridMenu(!showGridMenu);
+              setShowDropdown(false);
+            }}
             className="text-white rounded-lg font-extralight cursor-pointer"
           >
-            {/* <FiSun size={25} /> */}
+            <CgMenuGridO size={25} />
           </button>
           <button
-            onClick={() => setShowDropdown(!showDropdown)}
+            onClick={() => {
+              setShowDropdown(!showDropdown);
+              setShowGridMenu(false);
+            }}
             className="text-white rounded-lg font-bold cursor-pointer"
           >
             <AiOutlineProduct size={25} />
           </button>
-          <button
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="text-white rounded-lg font-extralight cursor-pointer"
-          >
-            <FaRegCircleUser size={23} />
-          </button>
-
-          <div
-            className={`absolute right-6 top-16 w-48 bg-[#1c1c1f] border border-zinc-800 rounded-lg overflow-hidden transition-all duration-300 z-50
-            ${
-              showDropdown
-                ? "opacity-100 translate-y-0 scale-100"
-                : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
-            }`}
-          >
-            {dropdownItems.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.href}
-                onClick={() => setShowDropdown(false)}
-                className="block text-white text-sm px-4 py-2 hover:bg-zinc-700 transition-all duration-200"
-              >
-                {item.title}
-              </Link>
-            ))}
+          <div>
+            <button
+              onClick={() => {
+                toast("This functionality is not integrated yet!", {
+                  icon: "🚧",
+                  style: {
+                    borderRadius: "5px",
+                    background: "#222",
+                    color: "#fff",
+                  },
+                });
+              }}
+              className="text-white rounded-lg font-extralight cursor-pointer"
+            >
+              <FaRegCircleUser size={23} />
+            </button>
+            <Toaster position="bottom-right" reverseOrder={false} />
           </div>
+
+          {/* Grid Menu Dropdown */}
+          {showGridMenu && (
+            <motion.div
+              ref={gridMenuRef}
+              className="absolute right-6 top-16 grid grid-cols-2 gap-4 p-4 w-64 bg-[#1c1c1f] border border-zinc-800 rounded-lg z-50"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              {[
+                { icon: <ImSphere size={40} />, title: "Main" },
+                { icon: <TbBrandAppleArcade size={40} />, title: "Arcade" },
+                { icon: <GiSlowBlob size={40} />, title: "AI Website" },
+                { icon: <PiSphereDuotone size={40} />, title: "Portfolio" },
+                { icon: <RiBloggerLine size={40} />, title: "Blog" },
+                { icon: <TbAutomation size={40} />, title: "Automation" },
+              ].map((data, i) => (
+                <div
+                  key={i}
+                  className={`h-20 flex flex-col justify-center items-center gap-2 rounded-lg hover:bg-zinc-800 transition duration-200 hover:scale-105 cursor-pointer`}
+                >
+                  {data.icon}
+                  {data.title}
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {/* Default Dropdown */}
+          {showDropdown && (
+            <motion.div
+              ref={dropdownRef}
+              className="absolute right-6 top-16 w-48 bg-[#1c1c1f] border border-zinc-800 rounded-lg overflow-hidden z-50"
+              initial={{ opacity: 0, translateY: -10 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              exit={{ opacity: 0, translateY: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              {dropdownItems.map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={item.href}
+                  onClick={() => setShowDropdown(false)}
+                  className="block text-white text-sm px-4 py-2 hover:bg-zinc-700 transition-all duration-200"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </motion.div>
+          )}
         </div>
 
+        {/* Mobile View Button */}
         <div className="sm:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -97,9 +160,11 @@ const Topbar = () => {
           </button>
         </div>
 
+        {/* Mobile Dropdown */}
         <div
-          className={`sm:hidden absolute top-16 left-0 w-full bg-[#1c1c1f] border-t border-zinc-800 shadow-lg transition-all duration-300 z-40
-          ${mobileMenuOpen ? "block" : "hidden"}`}
+          className={`sm:hidden absolute top-16 left-0 w-full bg-[#1c1c1f] border-t border-zinc-800 shadow-lg transition-all duration-300 z-40 ${
+            mobileMenuOpen ? "block" : "hidden"
+          }`}
         >
           {dropdownItems.map((item, idx) => (
             <Link
@@ -129,7 +194,7 @@ const Topbar = () => {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
             <button
               className="absolute top-3 right-3 text-zinc-400 cursor-pointer"
@@ -141,7 +206,7 @@ const Topbar = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                alert('Thanks for your feedback! 🙏');
+                alert("Thanks for your feedback! 🙏");
                 setShowFeedbackModal(false);
               }}
               className="space-y-4"
@@ -166,7 +231,7 @@ const Topbar = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 px-4  cursor-pointer bg-white transition rounded-lg font-semibold text-black"
+                className="w-full py-2 px-4 cursor-pointer bg-white transition rounded-lg font-semibold text-black"
               >
                 Submit Feedback
               </button>

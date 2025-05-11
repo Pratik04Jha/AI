@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaCrown, FaHeart, FaStar } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function UpgradeToPro() {
   const plans = [
@@ -66,7 +67,6 @@ export default function UpgradeToPro() {
         {plans.map((plan, i) => (
           <motion.div
             key={i}
-            
             className={`flex flex-col justify-between rounded-[10px] p-6 border ${
               plan.highlight
                 ? "bg-gradient-to-br scale-110  text-white bg-[#1f2622a7] border-2 border-[#00692A] shadow-2xl z-10"
@@ -78,7 +78,11 @@ export default function UpgradeToPro() {
                 {plan.icon}
                 <h2 className="text-2xl font-bold">{plan.title}</h2>
               </div>
-              <p className={`text-3xl font-extrabold ${plan.highlight ? "" : "text-zinc-300"}`}>
+              <p
+                className={`text-3xl font-extrabold ${
+                  plan.highlight ? "" : "text-zinc-300"
+                }`}
+              >
                 {plan.price}
               </p>
 
@@ -95,15 +99,27 @@ export default function UpgradeToPro() {
                   ? "text-white bg-[#00692A] cursor-pointer"
                   : "bg-white text-black cursor-pointer"
               }`}
+              onClick={() => {
+                toast("This functionality is not integrated yet!", {
+                  icon: "🚧",
+                  style: {
+                    borderRadius: "5px",
+                    background: "#222",
+                    color: "#fff",
+                  },
+                });
+              }}
             >
               {plan.buttonText}
             </button>
           </motion.div>
         ))}
+        <Toaster position="bottom-right" reverseOrder={false} />
       </div>
 
       <p className="text-zinc-400 mt-12 text-center text-sm max-w-xl mb-2">
-        Whether you're vibing with the Free version, going beast mode with Pro, or dropping love with a donation - every step helps me grow 
+        Whether you're vibing with the Free version, going beast mode with Pro,
+        or dropping love with a donation - every step helps me grow
       </p>
     </motion.div>
   );
