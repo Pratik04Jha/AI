@@ -48,11 +48,11 @@ export default function UpgradeToPro() {
       price: "$0",
       icon: <FaStar size={24} />,
       features: [
-        "Generate up to 4 images per prompt",
-        "Basic image quality",
-        "Limited prompt length",
+        "Generate images till free API limit",
+        "Generate some quotes/day",
+        "Enhance images till API limit hits",
         "No login required",
-        "Community support only",
+        "Chatbot character limitations",
       ],
       buttonText: "You’re Using This",
       highlight: false,
@@ -65,11 +65,11 @@ export default function UpgradeToPro() {
         "Unlimited image generations",
         "High-res HD quality images",
         "Faster generation speed",
-        "Longer and more complex prompts",
+        "Longer answer length",
         "Priority access to new features",
         "Exclusive styles, filters, and settings",
         "Smart prompt assist (AI-enhanced)",
-        "24/7 Pro support",
+        ,
       ],
       buttonText: "Upgrade to Pro",
       highlight: true,
@@ -177,7 +177,7 @@ export default function UpgradeToPro() {
       {/* Footer Text */}
       <motion.p
         variants={textVariants}
-        className="text-zinc-400 mt-12 text-center text-sm max-w-xl mb-2"
+        className="text-zinc-400 mt-10 text-center text-sm max-w-xl "
       >
         Whether you're vibing with the Free version, going beast mode with Pro,
         or dropping love with a donation - every step helps me grow
