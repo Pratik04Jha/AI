@@ -17,6 +17,7 @@ import Link from "next/link";
 import { GrUpgrade } from "react-icons/gr";
 import { FiSearch, FiEdit } from "react-icons/fi";
 import { TfiHome } from "react-icons/tfi";
+import { IoMenu } from "react-icons/io5";
 
 
 const Sidebar = () => {
@@ -56,12 +57,12 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="md:hidden fixed top-2 left-4 z-[100000000]">
+      <div className="md:hidden fixed top-4 left-2 z-[100000000]">
         <button
-          className="text-white bg-zinc-800 p-2 rounded-md px-4"
+          className="text-white  rounded-md "
           onClick={() => setIsSidebarOpen(true)}
         >
-          ☰
+          <IoMenu size={25}/>
         </button>
       </div>
 

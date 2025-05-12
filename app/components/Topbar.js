@@ -51,15 +51,26 @@ const Topbar = () => {
 
   return (
     <>
-      <div className="flex h-15 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-black text-white sm:pl-65 pl-20">
+      {/* Blur backdrop - only shown when modal is open */}
+      {showFeedbackModal && (
+        <motion.div
+          className="fixed inset-0 backdrop-blur-md z-[99999998]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+
+      <div className={`flex h-15 w-full fixed z-[9999999] top-0 left-0 px-6 justify-between items-center bg-black text-white sm:pl-65 pl-10 ${showFeedbackModal ? "backdrop-blur-sm" : ""}`}>
         <button
-          className="text-white py-1 px-6 rounded-2xl border-1 border-white/50 cursor-pointer"
+          className="text-white py-1 text-[14px] sm:text-base px-4 sm:px-6 rounded-2xl border-1 border-white/50 cursor-pointer"
           onClick={() => setShowFeedbackModal(true)}
         >
           Feedback
         </button>
 
-        <div className="hidden sm:flex gap-5 items-center justify-end w-full">
+        <div className="flex gap-2 pl-28 sm:pl-0 sm:gap-5 items-center sm:justify-end justify-center w-full">
           <button
             onClick={() => {
               setShowGridMenu(!showGridMenu);
@@ -176,15 +187,7 @@ const Topbar = () => {
           )}
         </div>
 
-        {/* Mobile View Button */}
-        <div className="sm:hidden">
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="bg-white text-black rounded-lg py-1 px-4 font-semibold cursor-pointer"
-          >
-            {mobileMenuOpen ? <FaTimes /> : "Products"}
-          </button>
-        </div>
+        
 
         {/* Mobile Dropdown */}
         <div
@@ -208,7 +211,7 @@ const Topbar = () => {
       {/* Feedback Modal */}
       {showFeedbackModal && (
         <motion.div
-          className="fixed inset-0 bg-black/60 z-[99999999] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[99999999] flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -232,7 +235,7 @@ const Topbar = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("Thanks for your feedback! 🙏");
+                alert("Thanks for your feedback!");
                 setShowFeedbackModal(false);
               }}
               className="space-y-4"

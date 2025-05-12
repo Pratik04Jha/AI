@@ -7,7 +7,7 @@ const Navbar = () => {
         flex items-center justify-end
       left-0 sm:left-60 sm:w-[calc(100%-15rem)] sm:pr-30 sm:ml-25
     ">
-      <p className="text-white/80 text-[14px] sm:text-[12px] leading-snug w-full text-right">
+      <p className="text-white/80 text-[10px] sm:text-[12px] leading-snug w-full text-center sm:text-right">
         © All rights reserved - Pratik Jha
       </p>
     </nav>
